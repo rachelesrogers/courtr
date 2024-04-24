@@ -50,11 +50,11 @@ ui <- shiny::fluidPage(
 server <- function(input, output) {
 
   head_path <- shiny::reactive({
-    paste0("www/head",input$head_choice,".svg")
+    paste0("inst/www/head",input$head_choice,".svg")
   })
 
   body_path <- shiny::reactive({
-    paste0("www/",input$clothes_choice,".svg")
+    paste0("inst/www/",input$clothes_choice,".svg")
   })
 
 
