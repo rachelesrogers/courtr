@@ -1,47 +1,47 @@
-library(shiny)
-library(magick)
-library(colourpicker)
-library(rsvg)
-library(stringr)
-library(dplyr)
-
+#' Edit Color of Cartoon Figures
+#'
+#' @return A Shiny app allowing for character editing and downloading
+#' @export
+#'
+#' @examples
+#' Edit_Figures()
 Edit_Figures <- function(){
+  `%>%` <- magrittr::`%>%`
 change_fill <- function(file_contents, new_fill = "#aaaaff") {
-  str_replace_all(file_contents, "fill:#[0-f]{6};", sprintf("fill:%s;", new_fill))
+  stringr::str_replace_all(file_contents, "fill:#[0-f]{6};", sprintf("fill:%s;", new_fill))
 }
 
-fig_info <- read.csv("figure_information.csv")
+fig_info <- utils::read.csv("figure_information.csv")
 # input_info <- read.csv("input_information.csv")
 
 # Define UI for application that draws a histogram
-ui <- fluidPage(
+ui <- shiny::fluidPage(
 
   # Application title
-  titlePanel("Character Customization"),
+  shiny::titlePanel("Character Customization"),
 
   # Sidebar with a slider input for number of bins
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("clothes_choice", "Select Outfit:",
+  shiny::sidebarLayout(
+    shiny::sidebarPanel(
+      shiny::selectInput("clothes_choice", "Select Outfit:",
                   choices= unique(fig_info[fig_info$Part=="clothes",]$Label)),
-      selectInput("head_choice", "Select Head:",
+      shiny::selectInput("head_choice", "Select Head:",
                   choices= unique(fig_info[fig_info$Part=="head",]$Label)),
-      uiOutput('skinselect'),
-      uiOutput('hairselect'),
-      uiOutput('eyeselect'),
-      conditionalPanel(condition= "output.vis_shirt",
-                       uiOutput('shirtselect')),
-      conditionalPanel(condition= "output.vis_pants",
-                       uiOutput('pantsselect')),
-      conditionalPanel(condition= "output.vis_suit",
-                       uiOutput('suitselect')),
-      # uiOutput('color_inputs'),
-      downloadButton("download", "Download Character")
+      shiny::uiOutput('skinselect'),
+      shiny::uiOutput('hairselect'),
+      shiny::uiOutput('eyeselect'),
+      shiny::conditionalPanel(condition= "output.vis_shirt",
+                              shiny::uiOutput('shirtselect')),
+      shiny::conditionalPanel(condition= "output.vis_pants",
+                              shiny::uiOutput('pantsselect')),
+      shiny::conditionalPanel(condition= "output.vis_suit",
+                              shiny::uiOutput('suitselect')),
+      shiny::downloadButton("download", "Download Character")
     ),
 
     # Show a plot of the generated distribution
     mainPanel(
-      imageOutput("characterPlot")
+      shiny::imageOutput("characterPlot")
     )
   )
 )
@@ -49,78 +49,78 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
 
-  head_path <- reactive({
+  head_path <- shiny::reactive({
     paste0("www/head",input$head_choice,".svg")
   })
 
-  body_path <- reactive({
+  body_path <- shiny::reactive({
     paste0("www/",input$clothes_choice,".svg")
   })
 
 
 
-  clothes_selection <- reactive({
-    return(fig_info %>% filter(Part == "clothes", Label == input$clothes_choice))
+  clothes_selection <- shiny::reactive({
+    return(fig_info %>% dplyr::filter(Part == "clothes", Label == input$clothes_choice))
   })
 
-  output$vis_shirt <- reactive({'shirt' %in% clothes_selection()$Item})
+  output$vis_shirt <- shiny::reactive({'shirt' %in% clothes_selection()$Item})
 
-  outputOptions(output, "vis_shirt", suspendWhenHidden = FALSE)
+  shiny::outputOptions(output, "vis_shirt", suspendWhenHidden = FALSE)
 
-  output$vis_pants <- reactive({'pants' %in% clothes_selection()$Item})
+  output$vis_pants <- shiny::reactive({'pants' %in% clothes_selection()$Item})
 
-  outputOptions(output, "vis_pants", suspendWhenHidden = FALSE)
+  shiny::outputOptions(output, "vis_pants", suspendWhenHidden = FALSE)
 
-  output$vis_suit <- reactive({'suit' %in% clothes_selection()$Item})
+  output$vis_suit <- shiny::reactive({'suit' %in% clothes_selection()$Item})
 
-  outputOptions(output, "vis_suit", suspendWhenHidden = FALSE)
+  shiny::outputOptions(output, "vis_suit", suspendWhenHidden = FALSE)
 
-  head_selection <- reactive({
+  head_selection <- shiny::reactive({
     return(fig_info %>% filter(Part == "head", Label == input$head_choice))
   })
 
-  possible_colors <- reactive({
+  possible_colors <- shiny::reactive({
     return(unique(c(head_selection()$Item, clothes_selection()$Item)))
   })
 
-  default_eye <- reactive(head_selection()[head_selection()$Item=="eye",]$Color)
+  default_eye <- shiny::reactive(head_selection()[head_selection()$Item=="eye",]$Color)
 
   output$eyeselect <- renderUI({colourpicker::colourInput("eye",
                                                           "Eye Color:",
                                                           default_eye())
   })
 
-  default_hair <- reactive(head_selection()[head_selection()$Item=="hair",]$Color)
+  default_hair <- shiny::reactive(head_selection()[head_selection()$Item=="hair",]$Color)
 
   output$hairselect <- renderUI({colourpicker::colourInput("hair",
                                                            "Hair Color:",
                                                            default_hair())
   })
 
-  default_skin <- reactive(head_selection()[head_selection()$Item=="skin",]$Color)
+  default_skin <- shiny::reactive(head_selection()[head_selection()$Item=="skin",]$Color)
 
-  output$skinselect <- renderUI({colourpicker::colourInput("skin",
+  output$skinselect <- shiny::renderUI({colourpicker::colourInput("skin",
                                                            "Skin Color:",
                                                            default_skin())
   })
 
-  default_shirt <- reactive(clothes_selection()[clothes_selection()$Item=="shirt",]$Color)
+  default_shirt <- shiny::reactive(clothes_selection()[clothes_selection()$Item=="shirt",]$Color)
 
-  output$shirtselect <- renderUI({colourpicker::colourInput("shirt",
+  output$shirtselect <- shiny::renderUI({colourpicker::colourInput("shirt",
                                                             "Shirt Color:",
                                                             default_shirt())
   })
 
-  default_pants <- reactive(clothes_selection()[clothes_selection()$Item=="pants",]$Color)
+  default_pants <- shiny::reactive(clothes_selection()[clothes_selection()$Item=="pants",]$Color)
 
-  output$pantsselect <- renderUI({colourpicker::colourInput("pants",
+  output$pantsselect <- shiny::renderUI({colourpicker::colourInput("pants",
                                                             "Pants Color:",
                                                             default_pants())
   })
 
-  default_suit <- reactive(clothes_selection()[clothes_selection()$Item=="suit",]$Color)
+  default_suit <- shiny::reactive(clothes_selection()[clothes_selection()$Item=="suit",]$Color)
 
-  output$suitselect <- renderUI({
+  output$suitselect <- shiny::renderUI({
     colourpicker::colourInput("suit", "Suit Color:", default_suit())
   })
 
@@ -130,12 +130,12 @@ server <- function(input, output) {
   # })
 
 
-  image_processing <- reactive({
+  image_processing <- shiny::reactive({
 
     file_head <- as.data.frame(paste(gsub("'","",readLines(head_path())), collapse = ""))
 
-    head_split <-file_head %>% str_split(">") %>%
-      as.data.frame(col.names="svg_file") %>% filter(svg_file !="")
+    head_split <-file_head %>% stringr::str_split(">") %>%
+      as.data.frame(col.names="svg_file") %>% dplyr::filter(svg_file !="")
 
     head_split$svg_file <- paste0(head_split$svg_file, ">")
 
@@ -153,12 +153,12 @@ server <- function(input, output) {
 
     file_final_head <- apply(head_split,2,paste, collapse="")
 
-    head_magic <- image_read_svg(file_final_head, width=400)
+    head_magic <- magick::image_read_svg(file_final_head, width=400)
 
     file_body <- as.data.frame(paste(gsub("'","",readLines(body_path())), collapse = ""))
 
-    body_split <-file_body %>% str_split(">") %>%
-      as.data.frame(col.names="svg_file") %>% filter(svg_file !="")
+    body_split <-file_body %>% stringr::str_split(">") %>%
+      as.data.frame(col.names="svg_file") %>% dplyr::filter(svg_file !="")
 
     body_split$svg_file <- paste0(body_split$svg_file, ">")
 
@@ -182,23 +182,23 @@ server <- function(input, output) {
     file_final_body <- apply(body_split,2,paste, collapse="")
 
 
-    body_magic <- image_read_svg(file_final_body, width=400)
+    body_magic <- magick::image_read_svg(file_final_body, width=400)
 
 
     img <- c(body_magic, head_magic)
 
-    combined <- image_flatten(img)
+    combined <- magick::image_flatten(img)
 
 
-    tmpfile <- image_write(combined, tempfile(fileext='png'), format="png")
+    tmpfile <- magick::image_write(combined, tempfile(fileext='png'), format="png")
 
     list(src = tmpfile, contentType = "image/png", width="50%")})
 
 
 
-  output$characterPlot <- renderImage({image_processing()}, deleteFile = FALSE)
+  output$characterPlot <- shiny::renderImage({image_processing()}, deleteFile = FALSE)
 
-  output$download <- downloadHandler(
+  output$download <- shiny::downloadHandler(
     filename = "Character.png",
     content = function(file) {
       img <- image_processing()$src
@@ -207,5 +207,5 @@ server <- function(input, output) {
 }
 
 # Run the application
-shinyApp(ui = ui, server = server)
+shiny::shinyApp(ui = ui, server = server)
 }
