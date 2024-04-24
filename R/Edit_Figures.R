@@ -11,7 +11,7 @@ change_fill <- function(file_contents, new_fill = "#aaaaff") {
   stringr::str_replace_all(file_contents, "fill:#[0-f]{6};", sprintf("fill:%s;", new_fill))
 }
 
-fig_info <- utils::read.csv("figure_information.csv")
+fig_info <- figure_information
 # input_info <- read.csv("input_information.csv")
 
 # Define UI for application that draws a histogram
@@ -40,7 +40,7 @@ ui <- shiny::fluidPage(
     ),
 
     # Show a plot of the generated distribution
-    mainPanel(
+    shiny::mainPanel(
       shiny::imageOutput("characterPlot")
     )
   )
@@ -76,7 +76,7 @@ server <- function(input, output) {
   shiny::outputOptions(output, "vis_suit", suspendWhenHidden = FALSE)
 
   head_selection <- shiny::reactive({
-    return(fig_info %>% filter(Part == "head", Label == input$head_choice))
+    return(fig_info %>% dplyr::filter(Part == "head", Label == input$head_choice))
   })
 
   possible_colors <- shiny::reactive({
@@ -85,7 +85,7 @@ server <- function(input, output) {
 
   default_eye <- shiny::reactive(head_selection()[head_selection()$Item=="eye",]$Color)
 
-  output$eyeselect <- renderUI({colourpicker::colourInput("eye",
+  output$eyeselect <- shiny::renderUI({colourpicker::colourInput("eye",
                                                           "Eye Color:",
                                                           default_eye())
   })
