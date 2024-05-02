@@ -14,13 +14,11 @@ change_fill <- function(file_contents, new_fill = "#aaaaff") {
 fig_info <- figure_information
 # input_info <- read.csv("input_information.csv")
 
-# Define UI for application that draws a histogram
 ui <- shiny::fluidPage(
 
   # Application title
   shiny::titlePanel("Character Customization"),
 
-  # Sidebar with a slider input for number of bins
   shiny::sidebarLayout(
     shiny::sidebarPanel(
       shiny::selectInput("clothes_choice", "Select Outfit:",
@@ -29,6 +27,10 @@ ui <- shiny::fluidPage(
                   choices= unique(fig_info[fig_info$Part=="head",]$Label)),
       shiny::uiOutput('skinselect'),
       shiny::uiOutput('hairselect'),
+      shiny::conditionalPanel(condition= "output.vis_hair2",
+                       shiny::uiOutput('hair2select')),
+      shiny::conditionalPanel(condition= "output.vis_hair3",
+                       shiny::uiOutput('hair3select')),
       shiny::uiOutput('eyeselect'),
       shiny::conditionalPanel(condition= "output.vis_shirt",
                               shiny::uiOutput('shirtselect')),
@@ -36,6 +38,8 @@ ui <- shiny::fluidPage(
                               shiny::uiOutput('pantsselect')),
       shiny::conditionalPanel(condition= "output.vis_suit",
                               shiny::uiOutput('suitselect')),
+      shiny::conditionalPanel(condition= "output.vis_tie",
+                       shiny::uiOutput('tieselect')),
       shiny::downloadButton("download", "Download Character")
     ),
 
@@ -75,9 +79,21 @@ server <- function(input, output) {
 
   shiny::outputOptions(output, "vis_suit", suspendWhenHidden = FALSE)
 
+  output$vis_tie <- shiny::reactive({'tie' %in% clothes_selection()$Item})
+
+  shiny::outputOptions(output, "vis_tie", suspendWhenHidden = FALSE)
+
   head_selection <- shiny::reactive({
     return(fig_info %>% dplyr::filter(Part == "head", Label == input$head_choice))
   })
+
+  output$vis_hair2 <- shiny::reactive({'hair2' %in% head_selection()$Item})
+
+  shiny::outputOptions(output, "vis_hair2", suspendWhenHidden = FALSE)
+
+  output$vis_hair3 <- shiny::reactive({'hair3' %in% head_selection()$Item})
+
+  shiny::outputOptions(output, "vis_hair3", suspendWhenHidden = FALSE)
 
   possible_colors <- shiny::reactive({
     return(unique(c(head_selection()$Item, clothes_selection()$Item)))
@@ -92,9 +108,21 @@ server <- function(input, output) {
 
   default_hair <- shiny::reactive(head_selection()[head_selection()$Item=="hair",]$Color)
 
-  output$hairselect <- renderUI({colourpicker::colourInput("hair",
+  output$hairselect <- shiny::renderUI({colourpicker::colourInput("hair",
                                                            "Hair Color:",
                                                            default_hair())
+  })
+
+  default_hair2 <- shiny::reactive(head_selection()[head_selection()$Item=="hair2",]$Color)
+
+  output$hair2select <- shiny::renderUI({
+    colourpicker::colourInput("hair2", "Secondary Hair Color:", default_hair2())
+  })
+
+  default_hair3 <- shiny::reactive(head_selection()[head_selection()$Item=="hair3",]$Color)
+
+  output$hair3select <- shiny::renderUI({
+    colourpicker::colourInput("hair3", "Hair Line Color:", default_hair3())
   })
 
   default_skin <- shiny::reactive(head_selection()[head_selection()$Item=="skin",]$Color)
@@ -124,6 +152,12 @@ server <- function(input, output) {
     colourpicker::colourInput("suit", "Suit Color:", default_suit())
   })
 
+  default_tie <- shiny::reactive(clothes_selection()[clothes_selection()$Item=="tie",]$Color)
+
+  output$tieselect <- shiny::renderUI({
+    colourpicker::colourInput("tie", "Tie Color:", default_tie())
+  })
+
   # output$color_inputs <- renderUI({
   #   list(paste(t(input_info$Question),collapse = ",br(),"))
   #   # list(input_info$Question)[[1]]
@@ -143,9 +177,17 @@ server <- function(input, output) {
 
     head_split[finding_row_head,] <- change_fill(head_split[finding_row_head,], input$skin)
 
-    finding_row_head<-mapply(grepl, "hair",head_split)
+    finding_row_head<-mapply(grepl, "hair1",head_split)
 
     head_split[finding_row_head,] <- change_fill(head_split[finding_row_head,], input$hair)
+
+    finding_row_head<-mapply(grepl, "hair2",head_split)
+
+    head_split[finding_row_head,] <- change_fill(head_split[finding_row_head,], input$hair2)
+
+    finding_row_head<-mapply(grepl, "hair_lines",head_split)
+
+    head_split[finding_row_head,] <- change_fill(head_split[finding_row_head,], input$hair3)
 
     finding_row_head<-mapply(grepl, "eye",head_split)
 
@@ -178,6 +220,10 @@ server <- function(input, output) {
     finding_row_body<-mapply(grepl, "suit",body_split)
 
     body_split[finding_row_body,] <- change_fill(body_split[finding_row_body,], input$suit)
+
+    finding_row_body<-mapply(grepl, "tie",body_split)
+
+    body_split[finding_row_body,] <- change_fill(body_split[finding_row_body,], input$tie)
 
     file_final_body <- apply(body_split,2,paste, collapse="")
 
