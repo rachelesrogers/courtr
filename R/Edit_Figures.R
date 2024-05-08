@@ -32,6 +32,8 @@ ui <- shiny::fluidPage(
       shiny::conditionalPanel(condition= "output.vis_hair3",
                        shiny::uiOutput('hair3select')),
       shiny::uiOutput('eyeselect'),
+      shiny::conditionalPanel(condition= "output.vis_glasses",
+                              shiny::uiOutput('glassesselect')),
       shiny::conditionalPanel(condition= "output.vis_shirt",
                               shiny::uiOutput('shirtselect')),
       shiny::conditionalPanel(condition= "output.vis_pants",
@@ -95,6 +97,10 @@ server <- function(input, output) {
 
   shiny::outputOptions(output, "vis_hair3", suspendWhenHidden = FALSE)
 
+  output$vis_glasses <- shiny::reactive({'glasses' %in% head_selection()$Item})
+
+  shiny::outputOptions(output, "vis_glasses", suspendWhenHidden = FALSE)
+
   possible_colors <- shiny::reactive({
     return(unique(c(head_selection()$Item, clothes_selection()$Item)))
   })
@@ -123,6 +129,12 @@ server <- function(input, output) {
 
   output$hair3select <- shiny::renderUI({
     colourpicker::colourInput("hair3", "Hair Line Color:", default_hair3())
+  })
+
+  default_glasses <- shiny::reactive(head_selection()[head_selection()$Item=="glasses",]$Color)
+
+  output$glassesselect <- shiny::renderUI({
+    colourpicker::colourInput("glasses", "Glasses Color:", default_glasses())
   })
 
   default_skin <- shiny::reactive(head_selection()[head_selection()$Item=="skin",]$Color)
@@ -188,6 +200,10 @@ server <- function(input, output) {
     finding_row_head<-mapply(grepl, "hair_lines",head_split)
 
     head_split[finding_row_head,] <- change_fill(head_split[finding_row_head,], input$hair3)
+
+    finding_row_head<-mapply(grepl, "glasses",head_split)
+
+    head_split[finding_row_head,] <- change_fill(head_split[finding_row_head,], input$glasses)
 
     finding_row_head<-mapply(grepl, "eye",head_split)
 
