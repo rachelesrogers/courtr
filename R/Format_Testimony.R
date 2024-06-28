@@ -30,15 +30,18 @@ center_left_testimony$after = "</div></div> "
 
 narrator_testimony <- combined_testimony %>% dplyr::filter(Bubble == "None") %>%
   dplyr::mutate(before ="", after = "")
+#
+# combined_testimony <- dplyr::left_join(combined_testimony, narrator_testimony)
+# combined_testimony <- dplyr::left_join(combined_testimony, center_left_testimony)
+# combined_testimony <- dplyr::left_join(combined_testimony, right_testimony)
 
-combined_testimony <- dplyr::left_join(combined_testimony, narrator_testimony)
-combined_testimony <- dplyr::left_join(combined_testimony, center_left_testimony)
-combined_testimony <- dplyr::left_join(combined_testimony, right_testimony)
+combined_testimony_final <- rbind(narrator_testimony, center_left_testimony, right_testimony)
+combined_testimony_final <- combined_testimony_final[order(combined_testimony_final$Count),]
 
-min_max <- combined_testimony %>% dplyr::group_by(Page) %>%
+min_max <- combined_testimony_final %>% dplyr::group_by(Page) %>%
   dplyr::summarise(min_count=min(Count), max_count=max(Count)) %>% dplyr::ungroup()
 
-combined_testimony_trial <- left_join(combined_testimony,min_max)
+combined_testimony_trial <- dplyr::left_join(combined_testimony_final,min_max)
 
 combined_testimony_trial <- combined_testimony_trial %>%
   dplyr::mutate(before=ifelse(Count==min_count,paste("<div style='display:grid'>",before,sep=""), before)) %>%
