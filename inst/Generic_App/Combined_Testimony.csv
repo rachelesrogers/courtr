@@ -1,0 +1,21 @@
+Count,Condition_1,Condition_2,Condition_3,Page,Speaker,Bubble,Text
+1,All,All,All,1,narrator,None,"The use of the narrator Speaker in the testimony document allows for instructions to participant. HTML tags can be used for testimony formatting. </br></br> A back button is not included, but there is a notepad for participants to take notes."
+2,All,All,All,2,narrator,None,Increasing the page number will put text on the next page.
+3,All,All,All,3,court,Center,"This Speaker is the court. If Speaker labels are edited or added, the corresponding elements in the app.css file should also be edited."
+4,All,All,All,3,prosecution,Left,This Speaker is the prosecution. app.css arguments control the figure included in the speech bubble and the color of the speech bubble.
+5,All,All,All,3,court,Center,Note that this text is all on the same page - they have the same page number
+6,All,All,All,3,firearms,Right,"This Speaker is labelled as firearms. The Bubble argument specifies where the speech bubble is located (Left, Right, Center, or None)."
+7,All,All,All,4,prosecution,Left,"Conditions can control what text is displayed. Questions can also depend on conditions, but must be specified in the app.R document."
+8,All,All,All,4,firearms,Right,"In this template, there are three conditions listed. If the condition is listed as All, the text will be present for all conditions."
+9,All,All,All,4,prosecution,Left,"If a condition is specified, then the text will only appear in the specified condition."
+10,A,All,All,4,firearms,Right,"For example, this text only appears when Condition_1 is set as A."
+11,B,All,All,4,firearms,Right,"For example, this text only appears when Condition_1 is set as B."
+12,C,All,All,4,firearms,Right,"For example, this text only appears when Condition_1 is set as C."
+13,All,All,All,4,prosecution,Left,"If Conditions are re-labelled in this testimony document to match your experiment, they must also be relabelled in the app.R document."
+14,All,All,All,4,firearms,Right,The app.R document allows users to specify how often the condition appears.
+15,All,All,All,4,prosecution,Left,"Images can also be added to the testimony. The narrator Speaker is used to define the Exhibit number, without a speech bubble. The image Speaker is used for the image itself, specified using HTML format. The image is located in the www file."
+16,All,All,All,4,narrator,None,<center>---Exhibit A---</center><br/>
+17,All,All,All,4,image,None,"<img src='security.jpg' alt='security' style='width: 50%' height='' class='center'><br/><center><font size='-3'>image credit, if necessary</font></center>"
+18,All,All,All,4,firearms,Right,The above image clearly depicts the defendant not keeping off the grass.
+19,All,shorter,All,4,defense,Right,This Spearker is the defense. Conditions can also change the number of pages in the testimony
+20,All,longer,All,5,narrator,None,This testimony is a page longer than the other condition

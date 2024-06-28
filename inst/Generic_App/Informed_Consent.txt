@@ -1,0 +1,7 @@
+"<b> Informed Consent Document </b>
+<br/><br/>
+<b> Documentation of informed consent</b></br>
+By clicking &ldquo; I agree &rdquo; and continuing with the study, this means that<br/>(1) you have read and understood this consent form, and <br/>(2)
+you have decided to be in the research study.
+
+"

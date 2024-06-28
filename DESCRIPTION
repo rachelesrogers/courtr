@@ -16,6 +16,7 @@ BugReports: https://github.com/rachelesrogers/courtr/issues
 Imports: 
     colourpicker,
     dplyr,
+    fs,
     magick,
     magrittr,
     shiny,

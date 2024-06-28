@@ -1,0 +1,224 @@
+.center {
+margin-left:auto;
+margin-right:auto;
+display: block;
+}
+
+#images{
+text-align:center;
+}
+
+.sameline{
+display: inline-block;
+margin-left: auto;
+margin-right: auto;
+}
+
+
+.speech-bubble {
+	position: relative;
+	border-radius: .4em;
+	padding:5px;
+	margin-bottom:10px;
+	min-height: 120px;
+	min-width: 500px;
+	max-width: 750px;
+	display: inline-block;
+}
+
+.prosecution {
+	background: #d09597;
+	text-align: left;
+	margin-right:auto;
+	margin-left: 0;
+}
+
+.prosecution:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-left: 0;
+	border-bottom: 0;
+	border-right-color: #d09597;
+	margin-top: -10px;
+	margin-left: -20px;
+}
+
+.firearms-image{
+  background: url(Firearms.png) no-repeat center center;
+  background-size: 75px;
+	width: 75px;
+	height: 120px;
+	position: relative;
+	float: right;
+}
+
+.firearms{
+ 	background: #ea9a5d; 
+ 	text-align: right;
+ 	margin-right:0;
+	margin-left: auto;
+}
+
+.firearms:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-left-color: #ea9a5d;
+	border-right: 0;
+	border-bottom: 0;
+	margin-top: -10px;
+	margin-right: -20px;
+}
+.prosecution-image{
+  background: url(Prosecutor.png) no-repeat center center;
+  background-size: 75px;
+	width: 75px;
+	height: 120px;
+	position: relative;
+	float: left;
+}
+
+.algorithm {
+	background: #fff785;
+	text-align: right;
+	margin-right:0;
+	margin-left: auto;
+}
+
+.algorithm:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-left-color: #fff785;
+	border-right: 0;
+	border-bottom: 0;
+	margin-top: -10px;
+	margin-right: -20px;
+}
+
+.algorithm-image{
+  background: url(Algorithm.png) no-repeat center center;
+  background-size: 75px;
+	width: 75px;
+	height: 120px;
+	position: relative;
+	float: right;
+}
+
+.court {
+	background: #e8e8e8;
+	text-align: center;
+	margin-left:15%;
+margin-right:15%;
+}
+
+.court:after {
+ content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid #e8e8e8;
+  right: 50%;
+  top: -18px;
+}
+
+.court-image{
+  background: url(Judge.png) no-repeat center center;
+  background-size: 75px;
+	width: 75px;
+	height: 120px;
+	position: relative;
+	float: left;
+}
+
+.defense-image{
+  background: url(Defense.png) no-repeat center center;
+  background-size: 75px;
+	width: 75px;
+	height: 120px;
+	position: relative;
+	float: left;
+}
+
+.defense {
+	background: #bba3c7;
+	text-align: left;
+	margin-right:auto;
+	margin-left: 0;
+
+}
+
+.defense:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-right-color: #bba3c7;
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: -10px;
+	margin-left: -20px;
+}
+
+.defense-image-right{
+  background: url(Defense.png) no-repeat center center;
+  background-size: 75px;
+	width: 75px;
+	height: 120px;
+	position: relative;
+	float: right;
+}
+
+.defense-right {
+	background: #b396c2;
+	text-align: right;
+	margin-right:0;
+	margin-left: auto;
+
+}
+
+.defense-right:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-left-color: #b396c2;
+	border-right: 0;
+	border-bottom: 0;
+	margin-top: -10px;
+	margin-right: -20px;
+}
+
+.left-text{
+  min-width: 400px;
+  float: left;
+  max-width: 500px;
+}
+
+.right-text{
+  min-width: 500px;
+  float: right;
+  max-width:500px;
+}
