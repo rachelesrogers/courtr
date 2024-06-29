@@ -48,7 +48,7 @@ margin-right: auto;
 	margin-left: -20px;
 }
 
-.firearms-image{
+.firearms-image-right{
   background: url(Firearms.png) no-repeat center center;
   background-size: 75px;
 	width: 75px;
@@ -57,14 +57,14 @@ margin-right: auto;
 	float: right;
 }
 
-.firearms{
- 	background: #ea9a5d; 
+.firearms-right{
+ 	background: #ea9a5d;
  	text-align: right;
  	margin-right:0;
 	margin-left: auto;
 }
 
-.firearms:after {
+.firearms-right:after {
 	content: '';
 	position: absolute;
 	right: 0;

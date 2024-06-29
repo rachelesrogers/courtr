@@ -18,8 +18,8 @@ combined_testimony$after <- NA
 right_testimony <- combined_testimony %>% dplyr::filter(Bubble == "Right")
 
 right_testimony$before = paste0("<div class='speech-bubble ",right_testimony$Speaker,
-                                "'><div class='left-text'>")
-right_testimony$after = paste0("</div><div class='",right_testimony$Speaker,"-image'></div></div><br/>")
+                                "-right'><div class='left-text'>")
+right_testimony$after = paste0("</div><div class='",right_testimony$Speaker,"-image-right'></div></div><br/>")
 
 center_left_testimony <- combined_testimony %>% dplyr::filter(Bubble %in% c("Center", "Left"))
 
