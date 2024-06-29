@@ -251,6 +251,11 @@ server <- function(input, output) {
 
     combined <- magick::image_flatten(img)
 
+    combined <- magick::image_fill(combined, color = "transparent",
+                           refcolor = "white",
+                           fuzz=35,
+                           point = "+1+1")
+
 
     tmpfile <- magick::image_write(combined, tempfile(fileext='png'), format="png")
 
