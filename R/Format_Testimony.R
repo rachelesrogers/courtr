@@ -17,23 +17,34 @@ combined_testimony$after <- NA
 
 right_testimony <- combined_testimony %>% dplyr::filter(Bubble == "Right")
 
+if (dim(right_testimony)[1] > 0){
+
 right_testimony$before = paste0("<div class='speech-bubble ",right_testimony$Speaker,
                                 "-right'><div class='left-text'>")
 right_testimony$after = paste0("</div><div class='",right_testimony$Speaker,"-image-right'></div></div><br/>")
 
+}
+
 left_testimony <- combined_testimony %>% dplyr::filter(Bubble == "Left")
+
+if (dim(left_testimony)[1] > 0){
 
 left_testimony$before = paste0("<div class='speech-bubble ",
                          left_testimony$Speaker,"-left'><div class='",
                          left_testimony$Speaker,"-image-left'></div><div class='right-text'>")
 left_testimony$after = "</div></div> "
 
+}
+
 center_testimony <- combined_testimony %>% dplyr::filter(Bubble == "Center")
+
+if (dim(center_testimony)[1] > 0){
 
 center_testimony$before = paste0("<div class='speech-bubble ",
                                center_testimony$Speaker,"-center'><div class='",
                                center_testimony$Speaker,"-image-left'></div><div class='right-text'>")
 center_testimony$after = "</div></div> "
+}
 
 narrator_testimony <- combined_testimony %>% dplyr::filter(Bubble == "None") %>%
   dplyr::mutate(before ="", after = "")

@@ -9,7 +9,7 @@ Count,Condition_1,Condition_2,Condition_3,Page,Speaker,Bubble,Text
 8,All,All,All,4,firearms,Right,"This speaker is labelled as firearms. In this template, there are three conditions listed. If the condition is listed as All, the text will be present for all conditions."
 9,All,All,All,4,prosecution,Left,"If a condition is specified, then the text will only appear in the specified condition."
 10,A,All,All,4,firearms,Right,"For example, this text only appears when Condition_1 is set as A."
-11,B,All,All,4,firearmss,Right,"For example, this text only appears when Condition_1 is set as B."
+11,B,All,All,4,firearms,Right,"For example, this text only appears when Condition_1 is set as B."
 12,C,All,All,4,firearms,Right,"For example, this text only appears when Condition_1 is set as C."
 13,All,All,All,4,prosecution,Left,"If Conditions are re-labelled in this testimony document to match your experiment, they must also be relabelled in the app.R document."
 14,All,All,All,4,firearms,Right,The app.R document allows users to specify how often the condition appears.
