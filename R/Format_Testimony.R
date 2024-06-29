@@ -21,21 +21,24 @@ right_testimony$before = paste0("<div class='speech-bubble ",right_testimony$Spe
                                 "-right'><div class='left-text'>")
 right_testimony$after = paste0("</div><div class='",right_testimony$Speaker,"-image-right'></div></div><br/>")
 
-center_left_testimony <- combined_testimony %>% dplyr::filter(Bubble %in% c("Center", "Left"))
+left_testimony <- combined_testimony %>% dplyr::filter(Bubble == "Left")
 
-center_left_testimony$before = paste0("<div class='speech-bubble ",
-                         center_left_testimony$Speaker,"'><div class='",
-                         center_left_testimony$Speaker,"-image'></div><div class='right-text'>")
-center_left_testimony$after = "</div></div> "
+left_testimony$before = paste0("<div class='speech-bubble ",
+                         left_testimony$Speaker,"-left'><div class='",
+                         left_testimony$Speaker,"-image-left'></div><div class='right-text'>")
+left_testimony$after = "</div></div> "
+
+center_testimony <- combined_testimony %>% dplyr::filter(Bubble == "Center")
+
+center_testimony$before = paste0("<div class='speech-bubble ",
+                               center_testimony$Speaker,"-center'><div class='",
+                               center_testimony$Speaker,"-image-left'></div><div class='right-text'>")
+center_testimony$after = "</div></div> "
 
 narrator_testimony <- combined_testimony %>% dplyr::filter(Bubble == "None") %>%
   dplyr::mutate(before ="", after = "")
-#
-# combined_testimony <- dplyr::left_join(combined_testimony, narrator_testimony)
-# combined_testimony <- dplyr::left_join(combined_testimony, center_left_testimony)
-# combined_testimony <- dplyr::left_join(combined_testimony, right_testimony)
 
-combined_testimony_final <- rbind(narrator_testimony, center_left_testimony, right_testimony)
+combined_testimony_final <- rbind(narrator_testimony, left_testimony, center_testimony, right_testimony)
 combined_testimony_final <- combined_testimony_final[order(combined_testimony_final$Count),]
 
 min_max <- combined_testimony_final %>% dplyr::group_by(Page) %>%
