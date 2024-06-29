@@ -87,28 +87,19 @@ ui <- fluidPage(
 
 # --- server ------
 
-# pool <- dbPool(drv = RSQLite::SQLite(), dbname = "main_redo_database.sqlite")
+# This is used to connect to the database - currently commented out to avoid recording testing procedures
+# pool <- dbPool(drv = RSQLite::SQLite(), dbname = "demo.sqlite")
 
 server <- function(input, output, session) {
 
   id <- NULL
 
-  # Sampling between experimental conditions - as indicated in the testimony document
+  # Sampling between experimental conditions - as indicated in the Combined_Testimony.csv
   condition1 <- sample(c("A", "B", "C"),1, prob=c(1/3, 1/3, 1/3))
   condition2 <- sample(c("shorter", "longer"),1, prob=c(0.5, 0.5))
   condition3 <- sample(c("Yes", "No"),1, prob=c(0.5, 0.5))
 
-  # Experimental conditions with two different testimony lengths
-  # if (condition2 == "Yes"){
-  #   output$testpages <- reactive(23) # Number of testimony pages in first experimental condition
-  #   servpages <- reactive(23)
-  # } else if (condition2=="No"){
-  #   output$testpages <- reactive(14) # Number of testimony pages in second experimental condition
-  #   servpages <- reactive(14)
-  #                         }
-  # outputOptions(output, "testpages", suspendWhenHidden = FALSE)
-
-  # List of questions for two of the experimental conditions - randomized
+  # List of questions for two of the experimental conditions - randomized by 'sample()' in the middle
   if (condition2 == "shorter"){
     questorder <- c(c("fixed_question1","fixed_question2","fixed_question3"),
                     sample(c("hidden_slider", "visible_slider", "hidden_wlabels",
@@ -144,6 +135,7 @@ server <- function(input, output, session) {
              (Condition_3=="All"|Condition_3==condition3)) %>%
     aggregate(combined ~ Page, paste, collapse=" ")
 
+  # Determining the number of pages in the testimony
   output$testpages <- reactive(length(unique(subset_testimony$Page)))
   servpages <- reactive(length(unique(subset_testimony$Page)))
 
@@ -187,7 +179,7 @@ server <- function(input, output, session) {
     ))
   })
 
-  # Recording Consent Information
+  # Recording Consent Information - include when database is connected and active
   # observeEvent(input$informed,{
   #              con <- localCheckout(pool, env = parent.frame())
   #              dbAppendTable(con, "consent_page", consentans())
@@ -242,7 +234,6 @@ server <- function(input, output, session) {
   }
 
   btn_status <- function(vars) {
-    # Trying to validate for button - does not work
     observe({
       page_filled <- validate_input_list(input, vars)
       if (!page_filled) {
@@ -262,7 +253,7 @@ server <- function(input, output, session) {
     "jury", "jurycrim"
   ))
 
-  # Writing demographic answers to database
+  # Writing demographic answers to database - include when database is connected
   observeEvent(input$demopage,{
     # con <- localCheckout(pool, env = parent.frame())
     # if (input$demopage ==1){
@@ -288,7 +279,7 @@ server <- function(input, output, session) {
   })
 
 
-  # Recording notepad information to database
+  # Recording notepad information to database - include when database is active
   # observeEvent(input$testimonypage,{
   #   con <- localCheckout(pool, env = parent.frame())
   #   dbAppendTable(con, "notepad", noteans())
@@ -420,7 +411,7 @@ server <- function(input, output, session) {
       condition3 = condition3
     ))
   })
-
+  # Recording response information to database - include when database is active
   observeEvent(input$questionpage,{
     # con <- localCheckout(pool, env = parent.frame())
     # dbAppendTable(con, "survey_responses", responseans())

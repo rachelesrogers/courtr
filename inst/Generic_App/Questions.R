@@ -10,8 +10,8 @@ questions <- list(
 
   fixed_question2 = list(
     textInput("fixed_question2", "This question is fixed to be second.
-              Note that the name of the question in the Questions.R file appears twice -
-              as the name of the list and as the reference to the question itself.", value="")
+              Note that each question is a member of a named list (referenced in 'questorder' of app.R)
+              and each input has a label - used in recording responses", value="")
   ),
 
  fixed_question3 = list(
