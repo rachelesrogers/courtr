@@ -1,0 +1,34 @@
+This R Shiny app includes the following files:
+
+app.R
+This is the main application. It brings all of the other pieces of the app together to create a running study.
+Please read the comments for a walkthrough of the code/
+
+Combined_Testimony.csv
+This file is the template for writing testimony, which should be edited. The text in the template explains its various
+parts.
+
+Combined_Testimony_Formatted.csv
+This file is a formatted version of the Combined_Testimony.csv, with the relevant tags necessary for the study visualization.
+Please do not edit this document by hand - it can be created via the "Format_Testimony" function.
+
+Database_creation.R
+This script is used for creating a database for the study. It should be updated to match the study inputs.
+
+Demographics.R
+This document contains the demographic questions shown at the beginning of the study.
+
+Informed_Consent.txt
+This is the text document used for the study description at the beginning of the study.
+
+Questions.R
+This includes questions posed at the end of the study.
+
+reading_dataset.R
+This script shows how to open and save the dataset as a csv after observations have been recorded.
+
+www/ folder
+This folder contains figures and images relevant to the app, as well as the app.css file.
+
+www/app.css
+This is where the style for the study is indicated - particularly names of figures to include and color of speech bubbles.
