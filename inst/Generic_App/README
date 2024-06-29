@@ -1,19 +1,33 @@
 This R Shiny app includes the following files:
 
+
 app.R
 This is the main application. It brings all of the other pieces of the app together to create a running study.
-Please read the comments for a walkthrough of the code/
+Please read the comments for a walkthrough of the code.
+
 
 Combined_Testimony.csv
-This file is the template for writing testimony, which should be edited. The text in the template explains its various
-parts.
+This file is the template for writing testimony, which should be edited. It has 8 columns:
+
+  - Count: this column is a sequential count for the speech bubble, used to ensure text is in the proper order.
+
+  - Condition_1-Condition_3: these are experimental conditions. Labels should match the corresponding "condition1" - "condition3" in the app.R document.
+
+  - Page: indicates what page text should occur on.
+
+  - Speaker: indicates the speaker (corresponding to the text bubble and image in the app.css document)
+
+  - Bubble: position of the speech bubble (Left, Right, Center, or None)
+
+  - Text: the text to appear in the speech bubble
+
 
 Combined_Testimony_Formatted.csv
 This file is a formatted version of the Combined_Testimony.csv, with the relevant tags necessary for the study visualization.
 Please do not edit this document by hand - it can be created via the "Format_Testimony" function.
 
 Database_creation.R
-This script is used for creating a database for the study. It should be updated to match the study inputs.
+This script is used for creating a database for the study. It should be updated to match the questions and conditions included in the study (see app.R script)
 
 Demographics.R
 This document contains the demographic questions shown at the beginning of the study.
