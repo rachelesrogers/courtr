@@ -253,13 +253,14 @@ server <- function(input, output) {
 
     combined <- magick::image_fill(combined, color = "transparent",
                            refcolor = "white",
-                           fuzz=35,
+                           fuzz=30,
                            point = "+1+1")
 
 
     tmpfile <- magick::image_write(combined, tempfile(fileext='png'), format="png")
 
-    list(src = tmpfile, contentType = "image/png", width="50%")})
+    list(src = tmpfile, contentType = "image/png", width="50%")
+    })
 
 
 
