@@ -48,6 +48,66 @@ margin-right: auto;
 	margin-left: -20px;
 }
 
+.prosecution-image-left{
+  background: url(Prosecutor.png) no-repeat center center;
+  background-size: 75px;
+	width: 75px;
+	height: 120px;
+	position: relative;
+	float: left;
+}
+
+.prosecution-right {
+	background: #d09597;
+	text-align: right;
+	margin-right:0;
+	margin-left: auto;
+}
+
+.prosecution-right:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-right: 0;
+	border-bottom: 0;
+	border-left-color: #d09597;
+	margin-top: -10px;
+	margin-right: -20px;
+}
+
+.prosecution-image-right{
+  background: url(Prosecutor.png) no-repeat center center;
+  background-size: 75px;
+	width: 75px;
+	height: 120px;
+	position: relative;
+	float: right;
+}
+
+.prosecution-center {
+	background: #d09597;
+	text-align: center;
+	margin-right:15%;
+	margin-left: 15%;
+}
+
+.prosecution-center:after {
+	content: '';
+	position: absolute;
+	right: 50%;
+	top: -18px;
+	width: 0px;
+	height: 0px;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid #d09597;
+}
+
 .firearms-image-right{
   background: url(Firearms.png) no-repeat center center;
   background-size: 75px;
@@ -78,13 +138,56 @@ margin-right: auto;
 	margin-top: -10px;
 	margin-right: -20px;
 }
-.prosecution-image-left{
-  background: url(Prosecutor.png) no-repeat center center;
+
+.firearms-image-left{
+  background: url(Firearms.png) no-repeat center center;
   background-size: 75px;
 	width: 75px;
 	height: 120px;
 	position: relative;
 	float: left;
+}
+
+.firearms-left{
+ 	background: #ea9a5d;
+ 	text-align: left;
+ 	margin-right:auto;
+	margin-left: 0;
+}
+
+.firearms-left:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-right-color: #ea9a5d;
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: -10px;
+	margin-left: -20px;
+}
+
+.firearms-center{
+ 	background: #ea9a5d;
+ 	text-align: center;
+ 	margin-right: 15%;
+	margin-left: 15%;
+}
+
+.firearms-center:after {
+ content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid #ea9a5d;
+  right: 50%;
+  top: -18px;
 }
 
 .algorithm-right {
@@ -116,6 +219,111 @@ margin-right: auto;
 	height: 120px;
 	position: relative;
 	float: right;
+}
+
+.algorithm-image-left{
+  background: url(Algorithm.png) no-repeat center center;
+  background-size: 75px;
+	width: 75px;
+	height: 120px;
+	position: relative;
+	float: left;
+}
+
+.algorithm-left{
+ 	background: #fff785;
+ 	text-align: left;
+ 	margin-right:auto;
+	margin-left: 0;
+}
+
+.algorithm-left:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-right-color: #fff785;
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: -10px;
+	margin-left: -20px;
+}
+
+.algorithm-center{
+ 	background: #fff785;
+ 	text-align: center;
+ 	margin-right: 15%;
+	margin-left: 15%;
+}
+
+.algorithm-center:after {
+ content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid #fff785;
+  right: 50%;
+  top: -18px;
+}
+.court-left {
+	background: #e8e8e8;
+	text-align: left;
+	margin-right:auto;
+	margin-left: 0;
+
+}
+
+.court-left:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-right-color: #e8e8e8;
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: -10px;
+	margin-left: -20px;
+}
+
+.court-image-right{
+  background: url(Judge.png) no-repeat center center;
+  background-size: 75px;
+	width: 75px;
+	height: 120px;
+	position: relative;
+	float: right;
+}
+
+.court-right {
+	background: #e8e8e8;
+	text-align: right;
+	margin-right:0;
+	margin-left: auto;
+
+}
+
+.court-right:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-left-color: #e8e8e8;
+	border-right: 0;
+	border-bottom: 0;
+	margin-top: -10px;
+	margin-right: -20px;
 }
 
 .court-center {
@@ -209,6 +417,26 @@ margin-right:15%;
 	border-bottom: 0;
 	margin-top: -10px;
 	margin-right: -20px;
+}
+
+.defense-center{
+ 	background: #b396c2;
+ 	text-align: center;
+ 	margin-right: 15%;
+	margin-left: 15%;
+}
+
+.defense-center:after {
+ content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid #b396c2;
+  right: 50%;
+  top: -18px;
 }
 
 .left-text{
