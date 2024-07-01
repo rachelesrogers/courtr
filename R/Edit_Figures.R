@@ -60,8 +60,6 @@ server <- function(input, output) {
     paste0("inst/www/",input$clothes_choice,".svg")
   })
 
-
-
   clothes_selection <- shiny::reactive({
     return(fig_info %>% dplyr::filter(Part == "clothes", Label == input$clothes_choice))
   })
@@ -255,21 +253,23 @@ server <- function(input, output) {
                            refcolor = "white",
                            fuzz=30,
                            point = "+1+1")
-
-
-    tmpfile <- magick::image_write(combined, tempfile(fileext='png'), format="png")
-
-    list(src = tmpfile, contentType = "image/png", width="50%")
+    combined
     })
 
+  image_png <- shiny::reactive({
+    tmpfile <- magick::image_write(image_processing(), tempfile(fileext='png'), format="png")
+
+    list(src = tmpfile, contentType = "image/png", width="50%")
+  })
 
 
-  output$characterPlot <- shiny::renderImage({image_processing()}, deleteFile = FALSE)
+
+  output$characterPlot <- shiny::renderImage({image_png()}, deleteFile = FALSE)
 
   output$download <- shiny::downloadHandler(
     filename = "Character.png",
     content = function(file) {
-      img <- image_processing()$src
+      img <- image_png()$src
       file.copy(img, file)
     })
 }
