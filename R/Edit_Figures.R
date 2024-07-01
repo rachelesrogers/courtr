@@ -52,6 +52,13 @@ ui <- shiny::fluidPage(
 
 server <- function(input, output) {
 
+  # apply_fill <- function(image, item) {
+  #   finding_row<-mapply(grepl, item, image)
+  #   image[finding_row,] <- change_fill(image[finding_row,], input$item)
+  #
+  #   image
+  # }
+
   head_path <- shiny::reactive({
     paste0("inst/www/head",input$head_choice,".svg")
   })
@@ -196,13 +203,14 @@ server <- function(input, output) {
     body_short <- head(body_split, -1)
     combined_split <- rbind(body_short, row_remove)
 
+    # combined_split <- apply_fill(combined_split, "skin")
     finding_row<-mapply(grepl, "skin",combined_split)
 
-    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$skin)
+    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$"skin")
 
     finding_row<-mapply(grepl, "hair1",combined_split)
 
-    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$hair)
+    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$"hair")
 
     finding_row<-mapply(grepl, "hair2",combined_split)
 
@@ -219,10 +227,6 @@ server <- function(input, output) {
     finding_row<-mapply(grepl, "eye",combined_split)
 
     combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$eye)
-
-    finding_row<-mapply(grepl, "skin",combined_split)
-
-    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$skin)
 
     finding_row<-mapply(grepl, "shirt",combined_split)
 
