@@ -52,13 +52,6 @@ ui <- shiny::fluidPage(
 
 server <- function(input, output) {
 
-  # apply_fill <- function(image, item) {
-  #   finding_row<-mapply(grepl, item, image)
-  #   image[finding_row,] <- change_fill(image[finding_row,], input$item)
-  #
-  #   image
-  # }
-
   head_path <- shiny::reactive({
     paste0("inst/www/head",input$head_choice,".svg")
   })
@@ -203,10 +196,17 @@ server <- function(input, output) {
     body_short <- head(body_split, -1)
     combined_split <- rbind(body_short, row_remove)
 
-    # combined_split <- apply_fill(combined_split, "skin")
-    finding_row<-mapply(grepl, "skin",combined_split)
+    apply_fill <- function(image, item) {
+      finding_row<-mapply(grepl, item, image)
+      image[finding_row,] <- change_fill(image[finding_row,], input[[item]])
 
-    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$"skin")
+      image
+    }
+
+    combined_split <- apply_fill(combined_split, "skin")
+    # finding_row<-mapply(grepl, "skin",combined_split)
+    #
+    # combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$"skin")
 
     finding_row<-mapply(grepl, "hair1",combined_split)
 
