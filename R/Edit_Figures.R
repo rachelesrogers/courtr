@@ -42,6 +42,8 @@ ui <- shiny::fluidPage(
                               shiny::uiOutput('suitselect')),
       shiny::conditionalPanel(condition= "output.vis_tie",
                        shiny::uiOutput('tieselect')),
+      shiny::conditionalPanel(condition= "output.vis_shoes",
+                              shiny::uiOutput('shoesselect')),
       shiny::downloadButton("download", "Download Character")
     ),
 
@@ -84,6 +86,10 @@ server <- function(input, output) {
   output$vis_tie <- shiny::reactive({'tie' %in% clothes_selection()$Item})
 
   shiny::outputOptions(output, "vis_tie", suspendWhenHidden = FALSE)
+
+  output$vis_shoes <- shiny::reactive({'shoes' %in% clothes_selection()$Item})
+
+  shiny::outputOptions(output, "vis_shoes", suspendWhenHidden = FALSE)
 
   head_selection <- shiny::reactive({
     return(fig_info %>% dplyr::filter(Part == "head", Label == input$head_choice))
@@ -170,6 +176,12 @@ server <- function(input, output) {
     colourpicker::colourInput("tie", "Tie Color:", default_tie())
   })
 
+  default_shoes <- shiny::reactive(clothes_selection()[clothes_selection()$Item=="shoes",]$Color)
+
+  output$shoesselect <- shiny::renderUI({
+    colourpicker::colourInput("shoes", "Shoe Color:", default_shoes())
+  })
+
   # output$color_inputs <- renderUI({
   #   list(paste(t(input_info$Question),collapse = ",br(),"))
   #   # list(input_info$Question)[[1]]
@@ -240,6 +252,10 @@ server <- function(input, output) {
     finding_row_body<-mapply(grepl, "tie",body_split)
 
     body_split[finding_row_body,] <- change_fill(body_split[finding_row_body,], input$tie)
+
+    finding_row_body<-mapply(grepl, "shoes",body_split)
+
+    body_split[finding_row_body,] <- change_fill(body_split[finding_row_body,], input$shoes)
 
     file_final_body <- apply(body_split,2,paste, collapse="")
 
