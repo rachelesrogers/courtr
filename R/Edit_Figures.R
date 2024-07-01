@@ -182,12 +182,6 @@ server <- function(input, output) {
     colourpicker::colourInput("shoes", "Shoe Color:", default_shoes())
   })
 
-  # output$color_inputs <- renderUI({
-  #   list(paste(t(input_info$Question),collapse = ",br(),"))
-  #   # list(input_info$Question)[[1]]
-  # })
-
-
   image_processing <- shiny::reactive({
 
     file_head <- as.data.frame(paste(gsub("'","",readLines(head_path())), collapse = ""))
@@ -197,34 +191,6 @@ server <- function(input, output) {
 
     head_split$svg_file <- paste0(head_split$svg_file, ">")
 
-    finding_row_head<-mapply(grepl, "skin",head_split)
-
-    head_split[finding_row_head,] <- change_fill(head_split[finding_row_head,], input$skin)
-
-    finding_row_head<-mapply(grepl, "hair1",head_split)
-
-    head_split[finding_row_head,] <- change_fill(head_split[finding_row_head,], input$hair)
-
-    finding_row_head<-mapply(grepl, "hair2",head_split)
-
-    head_split[finding_row_head,] <- change_fill(head_split[finding_row_head,], input$hair2)
-
-    finding_row_head<-mapply(grepl, "hair_lines",head_split)
-
-    head_split[finding_row_head,] <- change_fill(head_split[finding_row_head,], input$hair3)
-
-    finding_row_head<-mapply(grepl, "glasses",head_split)
-
-    head_split[finding_row_head,] <- change_fill(head_split[finding_row_head,], input$glasses)
-
-    finding_row_head<-mapply(grepl, "eye",head_split)
-
-    head_split[finding_row_head,] <- change_fill(head_split[finding_row_head,], input$eye)
-
-    file_final_head <- apply(head_split,2,paste, collapse="")
-
-    head_magic <- magick::image_read_svg(file_final_head, width=400)
-
     file_body <- as.data.frame(paste(gsub("'","",readLines(body_path())), collapse = ""))
 
     body_split <-file_body %>% stringr::str_split(">") %>%
@@ -232,42 +198,70 @@ server <- function(input, output) {
 
     body_split$svg_file <- paste0(body_split$svg_file, ">")
 
+    row_remove <- tail(head_split, -3)
 
-    finding_row_body<-mapply(grepl, "skin",body_split)
+    body_short <- head(body_split, -1)
+    combined_split <- rbind(body_short, row_remove)
 
-    body_split[finding_row_body,] <- change_fill(body_split[finding_row_body,], input$skin)
+    finding_row<-mapply(grepl, "skin",combined_split)
 
-    finding_row_body<-mapply(grepl, "shirt",body_split)
+    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$skin)
 
-    body_split[finding_row_body,] <- change_fill(body_split[finding_row_body,], input$shirt)
+    finding_row<-mapply(grepl, "hair1",combined_split)
 
-    finding_row_body<-mapply(grepl, "pants",body_split)
+    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$hair)
 
-    body_split[finding_row_body,] <- change_fill(body_split[finding_row_body,], input$pants)
+    finding_row<-mapply(grepl, "hair2",combined_split)
 
-    finding_row_body<-mapply(grepl, "suit",body_split)
+    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$hair2)
 
-    body_split[finding_row_body,] <- change_fill(body_split[finding_row_body,], input$suit)
+    finding_row<-mapply(grepl, "hair_lines",combined_split)
 
-    finding_row_body<-mapply(grepl, "tie",body_split)
+    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$hair3)
 
-    body_split[finding_row_body,] <- change_fill(body_split[finding_row_body,], input$tie)
+    finding_row<-mapply(grepl, "glasses",combined_split)
 
-    finding_row_body<-mapply(grepl, "shoes",body_split)
+    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$glasses)
 
-    body_split[finding_row_body,] <- change_fill(body_split[finding_row_body,], input$shoes)
+    finding_row<-mapply(grepl, "eye",combined_split)
 
-    file_final_body <- apply(body_split,2,paste, collapse="")
+    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$eye)
+
+    finding_row<-mapply(grepl, "skin",combined_split)
+
+    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$skin)
+
+    finding_row<-mapply(grepl, "shirt",combined_split)
+
+    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$shirt)
+
+    finding_row<-mapply(grepl, "pants",combined_split)
+
+    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$pants)
+
+    finding_row<-mapply(grepl, "suit",combined_split)
+
+    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$suit)
+
+    finding_row<-mapply(grepl, "tie",combined_split)
+
+    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$tie)
+
+    finding_row<-mapply(grepl, "shoes",combined_split)
+
+    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$shoes)
+
+    file_final_combined<- apply(combined_split,2,paste, collapse="")
 
 
-    body_magic <- magick::image_read_svg(file_final_body, width=400)
+    combined_magic <- magick::image_read_svg(file_final_combined, width=400)
 
 
-    img <- c(body_magic, head_magic)
+    # img <- c(body_magic, head_magic)
+    #
+    # combined <- magick::image_flatten(img)
 
-    combined <- magick::image_flatten(img)
-
-    combined <- magick::image_fill(combined, color = "transparent",
+    combined <- magick::image_fill(combined_magic, color = "transparent",
                            refcolor = "white",
                            fuzz=30,
                            point = "+1+1")
