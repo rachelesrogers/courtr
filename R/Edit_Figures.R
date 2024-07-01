@@ -12,11 +12,8 @@ change_fill <- function(file_contents, new_fill = "#aaaaff") {
 }
 
 fig_info <- figure_information
-# input_info <- read.csv("input_information.csv")
 
 ui <- shiny::fluidPage(
-
-  # Application title
   shiny::titlePanel("Character Customization"),
 
   shiny::sidebarLayout(
@@ -47,14 +44,12 @@ ui <- shiny::fluidPage(
       shiny::downloadButton("download", "Download Character")
     ),
 
-    # Show a plot of the generated distribution
     shiny::mainPanel(
       shiny::imageOutput("characterPlot")
     )
   )
 )
 
-# Define server logic required to draw a histogram
 server <- function(input, output) {
 
   head_path <- shiny::reactive({
@@ -255,11 +250,6 @@ server <- function(input, output) {
 
 
     combined_magic <- magick::image_read_svg(file_final_combined, width=400)
-
-
-    # img <- c(body_magic, head_magic)
-    #
-    # combined <- magick::image_flatten(img)
 
     combined <- magick::image_fill(combined_magic, color = "transparent",
                            refcolor = "white",
