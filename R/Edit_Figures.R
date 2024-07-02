@@ -221,17 +221,11 @@ server <- function(input, output) {
 
     combined_split <- apply_fill(combined_split, "pants")
 
-    finding_row<-mapply(grepl, "suit",combined_split)
+    combined_split <- apply_fill(combined_split, "suit")
 
-    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$suit)
+    combined_split <- apply_fill(combined_split, "tie")
 
-    finding_row<-mapply(grepl, "tie",combined_split)
-
-    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$tie)
-
-    finding_row<-mapply(grepl, "shoes",combined_split)
-
-    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$shoes)
+    combined_split <- apply_fill(combined_split, "shoes")
 
     file_final_combined<- apply(combined_split,2,paste, collapse="")
 
