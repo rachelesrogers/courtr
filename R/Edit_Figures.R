@@ -251,14 +251,18 @@ server <- function(input, output) {
   output$characterPlot <- shiny::renderImage({image_png()}, deleteFile = FALSE)
 
   output$download_png <- shiny::downloadHandler(
-    filename = "Character.png",
+    filename = function() {
+      paste0(input$clothes_choice, '.png')
+    },
     content = function(file) {
       img <- image_png()$src
       file.copy(img, file)
     })
 
   output$download_svg <- shiny::downloadHandler(
-    filename = "Character.svg",
+      filename = function() {
+        paste0(input$clothes_choice, '.svg')
+      },
     content = function(file) {
       img <- image_processing()
       write(img, file)
