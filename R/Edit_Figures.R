@@ -207,9 +207,7 @@ server <- function(input, output) {
 
     combined_split <- apply_fill(combined_split, "hair1")
 
-    finding_row<-mapply(grepl, "hair2",combined_split)
-
-    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$hair2)
+    combined_split <- apply_fill(combined_split, "hair2")
 
     finding_row<-mapply(grepl, "hair_lines",combined_split)
 
