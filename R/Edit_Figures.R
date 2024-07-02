@@ -29,7 +29,8 @@ ui <- shiny::fluidPage(
                        shiny::uiOutput('hair2select')),
       shiny::conditionalPanel(condition= "output.vis_hair3",
                        shiny::uiOutput('hair3select')),
-      shiny::uiOutput('eyeselect'),
+      shiny::conditionalPanel(condition= "output.vis_eye",
+                              shiny::uiOutput('eyeselect')),
       shiny::conditionalPanel(condition= "output.vis_glasses",
                               shiny::uiOutput('glassesselect')),
       shiny::conditionalPanel(condition= "output.vis_shirt",
@@ -101,6 +102,10 @@ server <- function(input, output) {
   output$vis_glasses <- shiny::reactive({'glasses' %in% head_selection()$Item})
 
   shiny::outputOptions(output, "vis_glasses", suspendWhenHidden = FALSE)
+
+  output$vis_eye <- shiny::reactive({'eye' %in% head_selection()$Item})
+
+  shiny::outputOptions(output, "vis_eye", suspendWhenHidden = FALSE)
 
   default_eye <- shiny::reactive(head_selection()[head_selection()$Item=="eye",]$Color)
 
