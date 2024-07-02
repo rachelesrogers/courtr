@@ -108,74 +108,58 @@ server <- function(input, output) {
 
   default_eye <- shiny::reactive(head_selection()[head_selection()$Item=="eye",]$Color)
 
-  output$eyeselect <- shiny::renderUI({colourpicker::colourInput("eye",
-                                                          "Eye Color:",
-                                                          default_eye())
-  })
+  output$eyeselect <- shiny::renderUI({
+    colourpicker::colourInput("eye", "Eye Color:", default_eye())})
 
   default_hair <- shiny::reactive(head_selection()[head_selection()$Item=="hair",]$Color)
 
-  output$hairselect <- shiny::renderUI({colourpicker::colourInput("hair1",
-                                                           "Hair Color:",
-                                                           default_hair())
-  })
+  output$hairselect <- shiny::renderUI({
+    colourpicker::colourInput("hair1", "Hair Color:", default_hair())})
 
   default_hair2 <- shiny::reactive(head_selection()[head_selection()$Item=="hair2",]$Color)
 
   output$hair2select <- shiny::renderUI({
-    colourpicker::colourInput("hair2", "Secondary Hair Color:", default_hair2())
-  })
+    colourpicker::colourInput("hair2", "Secondary Hair Color:", default_hair2())})
 
   default_hair3 <- shiny::reactive(head_selection()[head_selection()$Item=="hair3",]$Color)
 
   output$hair3select <- shiny::renderUI({
-    colourpicker::colourInput("hair_lines", "Hair Line Color:", default_hair3())
-  })
+    colourpicker::colourInput("hair_lines", "Hair Line Color:", default_hair3())})
 
   default_glasses <- shiny::reactive(head_selection()[head_selection()$Item=="glasses",]$Color)
 
   output$glassesselect <- shiny::renderUI({
-    colourpicker::colourInput("glasses", "Glasses Color:", default_glasses())
-  })
+    colourpicker::colourInput("glasses", "Glasses Color:", default_glasses())})
 
   default_skin <- shiny::reactive(head_selection()[head_selection()$Item=="skin",]$Color)
 
-  output$skinselect <- shiny::renderUI({colourpicker::colourInput("skin",
-                                                           "Skin Color:",
-                                                           default_skin())
-  })
+  output$skinselect <- shiny::renderUI({
+    colourpicker::colourInput("skin", "Skin Color:", default_skin())})
 
   default_shirt <- shiny::reactive(clothes_selection()[clothes_selection()$Item=="shirt",]$Color)
 
-  output$shirtselect <- shiny::renderUI({colourpicker::colourInput("shirt",
-                                                            "Shirt Color:",
-                                                            default_shirt())
-  })
+  output$shirtselect <- shiny::renderUI({
+    colourpicker::colourInput("shirt", "Shirt Color:", default_shirt())})
 
   default_pants <- shiny::reactive(clothes_selection()[clothes_selection()$Item=="pants",]$Color)
 
-  output$pantsselect <- shiny::renderUI({colourpicker::colourInput("pants",
-                                                            "Pants Color:",
-                                                            default_pants())
-  })
+  output$pantsselect <- shiny::renderUI({
+    colourpicker::colourInput("pants", "Pants Color:", default_pants())})
 
   default_suit <- shiny::reactive(clothes_selection()[clothes_selection()$Item=="suit",]$Color)
 
   output$suitselect <- shiny::renderUI({
-    colourpicker::colourInput("suit", "Suit Color:", default_suit())
-  })
+    colourpicker::colourInput("suit", "Suit Color:", default_suit())})
 
   default_tie <- shiny::reactive(clothes_selection()[clothes_selection()$Item=="tie",]$Color)
 
   output$tieselect <- shiny::renderUI({
-    colourpicker::colourInput("tie", "Tie Color:", default_tie())
-  })
+    colourpicker::colourInput("tie", "Tie Color:", default_tie())})
 
   default_shoes <- shiny::reactive(clothes_selection()[clothes_selection()$Item=="shoes",]$Color)
 
   output$shoesselect <- shiny::renderUI({
-    colourpicker::colourInput("shoes", "Shoe Color:", default_shoes())
-  })
+    colourpicker::colourInput("shoes", "Shoe Color:", default_shoes())})
 
   image_processing <- shiny::reactive({
 
@@ -245,8 +229,6 @@ server <- function(input, output) {
 
     list(src = tmpfile, contentType = "image/png", width="50%")
   })
-
-
 
   output$characterPlot <- shiny::renderImage({image_png()}, deleteFile = FALSE)
 
