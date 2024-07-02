@@ -113,7 +113,7 @@ server <- function(input, output) {
 
   default_hair <- shiny::reactive(head_selection()[head_selection()$Item=="hair",]$Color)
 
-  output$hairselect <- shiny::renderUI({colourpicker::colourInput("hair",
+  output$hairselect <- shiny::renderUI({colourpicker::colourInput("hair1",
                                                            "Hair Color:",
                                                            default_hair())
   })
@@ -204,13 +204,8 @@ server <- function(input, output) {
     }
 
     combined_split <- apply_fill(combined_split, "skin")
-    # finding_row<-mapply(grepl, "skin",combined_split)
-    #
-    # combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$"skin")
 
-    finding_row<-mapply(grepl, "hair1",combined_split)
-
-    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$"hair")
+    combined_split <- apply_fill(combined_split, "hair1")
 
     finding_row<-mapply(grepl, "hair2",combined_split)
 
