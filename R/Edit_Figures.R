@@ -102,10 +102,6 @@ server <- function(input, output) {
 
   shiny::outputOptions(output, "vis_glasses", suspendWhenHidden = FALSE)
 
-  possible_colors <- shiny::reactive({
-    return(unique(c(head_selection()$Item, clothes_selection()$Item)))
-  })
-
   default_eye <- shiny::reactive(head_selection()[head_selection()$Item=="eye",]$Color)
 
   output$eyeselect <- shiny::renderUI({
