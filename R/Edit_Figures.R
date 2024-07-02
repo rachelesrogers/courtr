@@ -14,10 +14,11 @@ change_fill <- function(file_contents, new_fill = "#aaaaff") {
 fig_info <- figure_information
 
 ui <- shiny::fluidPage(
-  shiny::titlePanel("Character Customization"),
+  # shiny::titlePanel("Character Customization"),
 
   shiny::sidebarLayout(
     shiny::sidebarPanel(
+      h4(strong("Character Customization")),
       shiny::selectInput("clothes_choice", "Select Outfit:",
                   choices= unique(fig_info[fig_info$Part=="clothes",]$Label)),
       shiny::selectInput("head_choice", "Select Head:",
@@ -41,7 +42,8 @@ ui <- shiny::fluidPage(
                        shiny::uiOutput('tieselect')),
       shiny::conditionalPanel(condition= "output.vis_shoes",
                               shiny::uiOutput('shoesselect')),
-      shiny::downloadButton("download", "Download Character")
+      shiny::downloadButton("download_svg", "Download Character as SVG"),
+      shiny::downloadButton("download_png", "Download Character as PNG")
     ),
 
     shiny::mainPanel(
@@ -243,18 +245,19 @@ server <- function(input, output) {
 
     file_final_combined<- apply(combined_split,2,paste, collapse="")
 
-
-    combined_magic <- magick::image_read_svg(file_final_combined, width=400)
-
-    combined <- magick::image_fill(combined_magic, color = "transparent",
-                           refcolor = "white",
-                           fuzz=30,
-                           point = "+1+1")
-    combined
+    file_final_combined
     })
 
   image_png <- shiny::reactive({
-    tmpfile <- magick::image_write(image_processing(), tempfile(fileext='png'), format="png")
+
+    combined_magic <- magick::image_read_svg(image_processing(), width=400)
+
+    combined <- magick::image_fill(combined_magic, color = "transparent",
+                                   refcolor = "white",
+                                   fuzz=30,
+                                   point = "+1+1")
+
+    tmpfile <- magick::image_write(combined, tempfile(fileext='png'), format="png")
 
     list(src = tmpfile, contentType = "image/png", width="50%")
   })
@@ -263,11 +266,18 @@ server <- function(input, output) {
 
   output$characterPlot <- shiny::renderImage({image_png()}, deleteFile = FALSE)
 
-  output$download <- shiny::downloadHandler(
+  output$download_png <- shiny::downloadHandler(
     filename = "Character.png",
     content = function(file) {
       img <- image_png()$src
       file.copy(img, file)
+    })
+
+  output$download_svg <- shiny::downloadHandler(
+    filename = "Character.svg",
+    content = function(file) {
+      img <- image_processing()
+      write(img, file)
     })
 }
 
