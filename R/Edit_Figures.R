@@ -215,13 +215,7 @@ server <- function(input, output) {
 
     combined_split <- apply_fill(combined_split, "glasses")
 
-    # finding_row<-mapply(grepl, "glasses",combined_split)
-    #
-    # combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$glasses)
-
-    finding_row<-mapply(grepl, "eye",combined_split)
-
-    combined_split[finding_row,] <- change_fill(combined_split[finding_row,], input$eye)
+    combined_split <- apply_fill(combined_split, "eye")
 
     finding_row<-mapply(grepl, "shirt",combined_split)
 
