@@ -7,6 +7,7 @@
 #'
 #' @examples
 #' \dontrun{
+#' library(utils)
 #' template_testimony <- utils::read.csv("your/file/path/Combined_Testimony.csv")
 #' formatted_testimony <- Format_Testimony(template_testimony)
 #' }

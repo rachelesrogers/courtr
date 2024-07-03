@@ -180,9 +180,9 @@ server <- function(input, output) {
 
     body_split$svg_file <- paste0(body_split$svg_file, ">")
 
-    row_remove <- tail(head_split, -3)
+    row_remove <- utils::tail(head_split, -3)
 
-    body_short <- head(body_split, -1)
+    body_short <- utils::head(body_split, -1)
     combined_split <- rbind(body_short, row_remove)
 
     apply_fill <- function(image, item) {
