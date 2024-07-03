@@ -9,9 +9,11 @@
 #' }
 Edit_Figures <- function(){
   `%>%` <- magrittr::`%>%`
+  Label <- Part <- svg_file <- figure_information <- NULL
 change_fill <- function(file_contents, new_fill = "#aaaaff") {
   stringr::str_replace_all(file_contents, "fill:#[0-f]{6};", sprintf("fill:%s;", new_fill))
 }
+utils::data("figure_information", envir=environment())
 
 fig_info <- figure_information
 

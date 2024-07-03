@@ -13,6 +13,7 @@
 #' }
 
 Format_Testimony <- function(testimony_csv){
+  Bubble <- Count <- Page <- after <- before <- max_count <- min_count <- NULL
   `%>%` <- magrittr::`%>%`
 
   combined_testimony <- testimony_csv
