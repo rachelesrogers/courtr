@@ -4,7 +4,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' Edit_Figures()
+#' }
 Edit_Figures <- function(){
   `%>%` <- magrittr::`%>%`
 change_fill <- function(file_contents, new_fill = "#aaaaff") {
@@ -18,7 +20,7 @@ ui <- shiny::fluidPage(
 
   shiny::sidebarLayout(
     shiny::sidebarPanel(
-      h4(strong("Character Customization")),
+      shiny::h4(shiny::strong("Character Customization")),
       shiny::selectInput("clothes_choice", "Select Outfit:",
                   choices= unique(fig_info[fig_info$Part=="clothes",]$Label)),
       shiny::selectInput("head_choice", "Select Head:",

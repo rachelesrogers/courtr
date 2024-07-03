@@ -17,3 +17,8 @@ RShiny app template will be saved in designated location
 \description{
 Save RShiny Courtroom Study Template
 }
+\examples{
+\dontrun{
+Save_Template("your/file/path")
+}
+}

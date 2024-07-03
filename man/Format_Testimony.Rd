@@ -4,14 +4,20 @@
 \alias{Format_Testimony}
 \title{Format Testimony}
 \usage{
-Format_Testimony(testimony_file_path)
+Format_Testimony(testimony_csv)
 }
 \arguments{
-\item{testimony_file_path}{path to testimony csv file}
+\item{testimony_csv}{a .csv file of study testimony, formatted as shown in the template}
 }
 \value{
 a formatted csv file with appropriate div classes for speech bubbles
 }
 \description{
 Format Testimony
+}
+\examples{
+\dontrun{
+template_testimony <- utils::read.csv("your/file/path/Combined_Testimony.csv")
+formatted_testimony <- Format_Testimony(template_testimony)
+}
 }

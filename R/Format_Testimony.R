@@ -1,16 +1,20 @@
 #' Format Testimony
 #'
-#' @param testimony_file_path path to testimony csv file
+#' @param testimony_csv a .csv file of study testimony, formatted as shown in the template
 #'
 #' @return a formatted csv file with appropriate div classes for speech bubbles
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' template_testimony <- utils::read.csv("your/file/path/Combined_Testimony.csv")
+#' formatted_testimony <- Format_Testimony(template_testimony)
+#' }
 
-Format_Testimony <- function(testimony_file_path){
+Format_Testimony <- function(testimony_csv){
   `%>%` <- magrittr::`%>%`
 
-combined_testimony <- utils::read.csv(testimony_file_path)
+  combined_testimony <- testimony_csv
 
 combined_testimony$before <- NA
 combined_testimony$after <- NA

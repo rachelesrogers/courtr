@@ -13,5 +13,7 @@ A Shiny app allowing for character editing and downloading
 Edit Color of Cartoon Figures
 }
 \examples{
+\dontrun{
 Edit_Figures()
+}
 }

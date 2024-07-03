@@ -7,6 +7,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' Save_Template("your/file/path")
+#' }
 Save_Template <- function(file_path, overwrite=FALSE){
   fs::dir_copy(path="inst/Generic_App",
            new_path=file_path, overwrite = overwrite)
