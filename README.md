@@ -60,7 +60,9 @@ formatted file as “Combined_Testimony_Formatted.csv” in your downloaded
 template.
 
 ``` r
-formatted_testimony <- Format_Testimony("your/file/path/Combined_Testimony.csv")
+
+unformatted_testimony <- utils::read.csv("your/file/path/Combined_Testimony.csv")
+formatted_testimony <- Format_Testimony(unformatted_testimony)
 
 write.csv(formatted_testimony, "your/file/path/Combined_Testimony_Formatted.csv")
 ```

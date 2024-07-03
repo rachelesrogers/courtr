@@ -61,7 +61,9 @@ Insert your own testimony into the "Combined_Testimony.csv" file. Then, use the 
 Save this formatted file as "Combined_Testimony_Formatted.csv" in your downloaded template.
 
 ```{r, eval=FALSE}
-formatted_testimony <- Format_Testimony("your/file/path/Combined_Testimony.csv")
+
+unformatted_testimony <- utils::read.csv("your/file/path/Combined_Testimony.csv")
+formatted_testimony <- Format_Testimony(unformatted_testimony)
 
 write.csv(formatted_testimony, "your/file/path/Combined_Testimony_Formatted.csv")
 ```
