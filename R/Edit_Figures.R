@@ -92,7 +92,11 @@ server <- function(input, output) {
   shiny::outputOptions(output, "vis_shoes", suspendWhenHidden = FALSE)
 
   head_selection <- shiny::reactive({
+    if (input$clothes_choice != "hazmat"){
     return(fig_info %>% dplyr::filter(Part == "head", Label == input$head_choice))
+    } else if (input$clothes_choice == "hazmat"){
+      return(fig_info %>% dplyr::filter(Part == "clothes", Label == input$clothes_choice))
+    }
   })
 
   output$vis_hair2 <- shiny::reactive({'hair2' %in% head_selection()$Item})
@@ -168,13 +172,6 @@ server <- function(input, output) {
 
   image_processing <- shiny::reactive({
 
-    file_head <- as.data.frame(paste(gsub("'","",readLines(head_path())), collapse = ""))
-
-    head_split <-file_head %>% stringr::str_split(">") %>%
-      as.data.frame(col.names="svg_file") %>% dplyr::filter(svg_file !="")
-
-    head_split$svg_file <- paste0(head_split$svg_file, ">")
-
     file_body <- as.data.frame(paste(gsub("'","",readLines(body_path())), collapse = ""))
 
     body_split <-file_body %>% stringr::str_split(">") %>%
@@ -182,10 +179,22 @@ server <- function(input, output) {
 
     body_split$svg_file <- paste0(body_split$svg_file, ">")
 
+    if (input$clothes_choice != "hazmat"){
+
+    file_head <- as.data.frame(paste(gsub("'","",readLines(head_path())), collapse = ""))
+
+    head_split <-file_head %>% stringr::str_split(">") %>%
+      as.data.frame(col.names="svg_file") %>% dplyr::filter(svg_file !="")
+
+    head_split$svg_file <- paste0(head_split$svg_file, ">")
+
     row_remove <- utils::tail(head_split, -3)
 
     body_short <- utils::head(body_split, -1)
-    combined_split <- rbind(body_short, row_remove)
+    combined_split <- rbind(body_short, row_remove) } else {
+
+      combined_split <- body_split
+    }
 
     apply_fill <- function(image, item) {
       finding_row<-mapply(grepl, item, image)
