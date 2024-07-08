@@ -11,3 +11,15 @@ test_that("unknown speaker works", {
 
   expect_identical(test_result, expected_result)
 })
+
+test_that("order is based on count", {
+  testing <- data.frame(Count = 1:5, Page = rep(1,5), Speaker =
+                          c("narrator","defense", "prosecution", "narrator", "defense"),
+                        Bubble = c("None", "Right", "Left", "None", "Right"),
+                        Text = c("A", "B", "C", "D", "E"))
+  test_result <- Format_Testimony(testing)
+
+  expect_identical(test_result$Count, 1:5)
+
+  expect_identical(test_result$Text, c("A", "B", "C", "D", "E"))
+})
