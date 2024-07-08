@@ -1,6 +1,6 @@
 #' Format Testimony
 #'
-#' @param testimony_csv a .csv file of study testimony, formatted as shown in the template
+#' @param testimony_csv a .csv file of study testimony, formatted as shown in the template. Count, Page, Speaker, Bubble and Text are required columns.
 #'
 #' @return a formatted csv file with appropriate div classes for speech bubbles
 #' @export

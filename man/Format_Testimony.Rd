@@ -7,7 +7,7 @@
 Format_Testimony(testimony_csv)
 }
 \arguments{
-\item{testimony_csv}{a .csv file of study testimony, formatted as shown in the template}
+\item{testimony_csv}{a .csv file of study testimony, formatted as shown in the template. Count, Page, Speaker, Bubble and Text are required columns.}
 }
 \value{
 a formatted csv file with appropriate div classes for speech bubbles

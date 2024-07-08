@@ -25,8 +25,9 @@ ui <- shiny::fluidPage(
       shiny::h4(shiny::strong("Character Customization")),
       shiny::selectInput("clothes_choice", "Select Outfit:",
                   choices= unique(fig_info[fig_info$Part=="clothes",]$Label)),
-      shiny::selectInput("head_choice", "Select Head:",
-                  choices= unique(fig_info[fig_info$Part=="head",]$Label)),
+      shiny::conditionalPanel(condition="output.vis_head",
+                              shiny::selectInput("head_choice", "Select Head:",
+                  choices= unique(fig_info[fig_info$Part=="head",]$Label))),
       shiny::uiOutput('skinselect'),
       shiny::uiOutput('hairselect'),
       shiny::conditionalPanel(condition= "output.vis_hair2",
@@ -71,6 +72,20 @@ server <- function(input, output) {
     return(fig_info %>% dplyr::filter(Part == "clothes", Label == input$clothes_choice))
   })
 
+  head_selection <- shiny::reactive({
+    if (input$clothes_choice != "hazmat"){
+      return(fig_info %>% dplyr::filter(Part == "head", Label == input$head_choice))
+    } else if (input$clothes_choice == "hazmat"){
+      return(fig_info %>% dplyr::filter(Part == "clothes", Label == input$clothes_choice))
+    }
+  })
+
+  # Visibility of Elements
+
+  output$vis_head <- shiny::reactive({input$clothes_choice != "hazmat"})
+
+  shiny::outputOptions(output, "vis_head", suspendWhenHidden = FALSE)
+
   output$vis_shirt <- shiny::reactive({'shirt' %in% clothes_selection()$Item})
 
   shiny::outputOptions(output, "vis_shirt", suspendWhenHidden = FALSE)
@@ -91,14 +106,6 @@ server <- function(input, output) {
 
   shiny::outputOptions(output, "vis_shoes", suspendWhenHidden = FALSE)
 
-  head_selection <- shiny::reactive({
-    if (input$clothes_choice != "hazmat"){
-    return(fig_info %>% dplyr::filter(Part == "head", Label == input$head_choice))
-    } else if (input$clothes_choice == "hazmat"){
-      return(fig_info %>% dplyr::filter(Part == "clothes", Label == input$clothes_choice))
-    }
-  })
-
   output$vis_hair2 <- shiny::reactive({'hair2' %in% head_selection()$Item})
 
   shiny::outputOptions(output, "vis_hair2", suspendWhenHidden = FALSE)
@@ -114,6 +121,8 @@ server <- function(input, output) {
   output$vis_eye <- shiny::reactive({'eye' %in% head_selection()$Item})
 
   shiny::outputOptions(output, "vis_eye", suspendWhenHidden = FALSE)
+
+  # Default Colors
 
   default_eye <- shiny::reactive(head_selection()[head_selection()$Item=="eye",]$Color)
 
