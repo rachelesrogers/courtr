@@ -119,17 +119,9 @@ server <- function(input, output) {
       colourpicker::colourInput(item, label, default_item())})
   }
 
-  # default_eye <- shiny::reactive(head_selection()[head_selection()$Item=="eye",]$Color)
-  #
-  # output$eyeselect <- shiny::renderUI({
-  #   colourpicker::colourInput("eye", "Eye Color:", default_eye())})
-
   output$eyeselect <- question_format("eye", "Eye Color:")
 
-  default_hair <- shiny::reactive(head_selection()[head_selection()$Item=="hair1",]$Color)
-
-  output$hairselect <- shiny::renderUI({
-    colourpicker::colourInput("hair1", "Hair Color:", default_hair())})
+  output$hairselect <- question_format("hair1", "Hair Color:")
 
   default_hair2 <- shiny::reactive(head_selection()[head_selection()$Item=="hair2",]$Color)
 
