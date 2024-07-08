@@ -139,25 +139,13 @@ server <- function(input, output) {
 
   output$shirtselect <- question_clothes("shirt", "Shirt Color:")
 
-  default_pants <- shiny::reactive(clothes_selection()[clothes_selection()$Item=="pants",]$Color)
+  output$pantsselect <- question_clothes("pants", "Pants Color:")
 
-  output$pantsselect <- shiny::renderUI({
-    colourpicker::colourInput("pants", "Pants Color:", default_pants())})
+  output$suitselect <- question_clothes("suit", "Suit Color:")
 
-  default_suit <- shiny::reactive(clothes_selection()[clothes_selection()$Item=="suit",]$Color)
+  output$tieselect <- question_clothes("tie", "Tie Color:")
 
-  output$suitselect <- shiny::renderUI({
-    colourpicker::colourInput("suit", "Suit Color:", default_suit())})
-
-  default_tie <- shiny::reactive(clothes_selection()[clothes_selection()$Item=="tie",]$Color)
-
-  output$tieselect <- shiny::renderUI({
-    colourpicker::colourInput("tie", "Tie Color:", default_tie())})
-
-  default_shoes <- shiny::reactive(clothes_selection()[clothes_selection()$Item=="shoes",]$Color)
-
-  output$shoesselect <- shiny::renderUI({
-    colourpicker::colourInput("shoes", "Shoe Color:", default_shoes())})
+  output$shoesselect <- question_clothes("shoes", "Shoe Color:")
 
   image_processing <- shiny::reactive({
 
