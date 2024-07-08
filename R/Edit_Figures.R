@@ -103,7 +103,7 @@ server <- function(input, output) {
   output$vis_hair2 <- shiny::reactive({'hair2' %in% head_selection()$Item})
   shiny::outputOptions(output, "vis_hair2", suspendWhenHidden = FALSE)
 
-  output$vis_hair3 <- shiny::reactive({'hair3' %in% head_selection()$Item})
+  output$vis_hair3 <- shiny::reactive({'hair_lines' %in% head_selection()$Item})
   shiny::outputOptions(output, "vis_hair3", suspendWhenHidden = FALSE)
 
   output$vis_glasses <- shiny::reactive({'glasses' %in% head_selection()$Item})
@@ -123,12 +123,9 @@ server <- function(input, output) {
 
   output$hairselect <- question_format("hair1", "Hair Color:")
 
-  default_hair2 <- shiny::reactive(head_selection()[head_selection()$Item=="hair2",]$Color)
+  output$hair2select <- question_format("hair2", "Secondary Hair Color:")
 
-  output$hair2select <- shiny::renderUI({
-    colourpicker::colourInput("hair2", "Secondary Hair Color:", default_hair2())})
-
-  default_hair3 <- shiny::reactive(head_selection()[head_selection()$Item=="hair3",]$Color)
+  default_hair3 <- shiny::reactive(head_selection()[head_selection()$Item=="hair_lines",]$Color)
 
   output$hair3select <- shiny::renderUI({
     colourpicker::colourInput("hair_lines", "Hair Line Color:", default_hair3())})
