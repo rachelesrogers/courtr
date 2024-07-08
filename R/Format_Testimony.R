@@ -70,5 +70,7 @@ combined_testimony_trial <- combined_testimony_trial %>%
 combined_testimony_trial$combined <- paste(combined_testimony_trial$before, combined_testimony_trial$Text, sep=" ")
 combined_testimony_trial$combined <- paste(combined_testimony_trial$combined, combined_testimony_trial$after, sep=" ")
 
+combined_testimony_trial <- combined_testimony_trial %>% dplyr::select(!c(min_count, max_count))
+
 return(combined_testimony_trial)
 }

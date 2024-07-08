@@ -4,7 +4,6 @@ test_that("unknown speaker works", {
                Text = "testing unknown speaker",
                before = "<div style='display:grid'><div class='speech-bubble jimmy-right'><div class='left-text'>",
                after = "</div><div class='jimmy-image-right'></div></div><br/></div>",
-               min_count = 1, max_count = 1,
                combined = "<div style='display:grid'><div class='speech-bubble jimmy-right'><div class='left-text'> testing unknown speaker </div><div class='jimmy-image-right'></div></div><br/></div>")
   testing <- data.frame(Count = 1, Page = 1, Speaker = "jimmy",
                         Bubble = "Right", Text = "testing unknown speaker")
