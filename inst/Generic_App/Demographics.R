@@ -37,7 +37,6 @@ demo <- list(list(
       "Slightly Uncomfortable", "Moderately Uncomfortable", "Extremely Uncomfortable"
     ), selected=character(0)
   ),
-  #  actionButton("page1", "Next"),
   br()
 ),
 list(
@@ -89,7 +88,6 @@ list(
     "If you have served on a jury, did the trial involve criminal charges against the defendant?",
     c("Yes", "No", "N/A"), selected="N/A"
   ),
-  #   actionButton("page2", "Next"),
   br()
 )
 
