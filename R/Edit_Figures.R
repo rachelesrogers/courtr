@@ -83,51 +83,48 @@ server <- function(input, output) {
   # Visibility of Elements
 
   output$vis_head <- shiny::reactive({input$clothes_choice != "hazmat"})
-
   shiny::outputOptions(output, "vis_head", suspendWhenHidden = FALSE)
 
   output$vis_shirt <- shiny::reactive({'shirt' %in% clothes_selection()$Item})
-
   shiny::outputOptions(output, "vis_shirt", suspendWhenHidden = FALSE)
 
   output$vis_pants <- shiny::reactive({'pants' %in% clothes_selection()$Item})
-
   shiny::outputOptions(output, "vis_pants", suspendWhenHidden = FALSE)
 
   output$vis_suit <- shiny::reactive({'suit' %in% clothes_selection()$Item})
-
   shiny::outputOptions(output, "vis_suit", suspendWhenHidden = FALSE)
 
   output$vis_tie <- shiny::reactive({'tie' %in% clothes_selection()$Item})
-
   shiny::outputOptions(output, "vis_tie", suspendWhenHidden = FALSE)
 
   output$vis_shoes <- shiny::reactive({'shoes' %in% clothes_selection()$Item})
-
   shiny::outputOptions(output, "vis_shoes", suspendWhenHidden = FALSE)
 
   output$vis_hair2 <- shiny::reactive({'hair2' %in% head_selection()$Item})
-
   shiny::outputOptions(output, "vis_hair2", suspendWhenHidden = FALSE)
 
   output$vis_hair3 <- shiny::reactive({'hair3' %in% head_selection()$Item})
-
   shiny::outputOptions(output, "vis_hair3", suspendWhenHidden = FALSE)
 
   output$vis_glasses <- shiny::reactive({'glasses' %in% head_selection()$Item})
-
   shiny::outputOptions(output, "vis_glasses", suspendWhenHidden = FALSE)
 
   output$vis_eye <- shiny::reactive({'eye' %in% head_selection()$Item})
-
   shiny::outputOptions(output, "vis_eye", suspendWhenHidden = FALSE)
 
   # Default Colors
+  question_format <- function(item, label){
+    default_item <- shiny::reactive(head_selection()[head_selection()$Item==item,]$Color)
+    shiny::renderUI({
+      colourpicker::colourInput(item, label, default_item())})
+  }
 
-  default_eye <- shiny::reactive(head_selection()[head_selection()$Item=="eye",]$Color)
+  # default_eye <- shiny::reactive(head_selection()[head_selection()$Item=="eye",]$Color)
+  #
+  # output$eyeselect <- shiny::renderUI({
+  #   colourpicker::colourInput("eye", "Eye Color:", default_eye())})
 
-  output$eyeselect <- shiny::renderUI({
-    colourpicker::colourInput("eye", "Eye Color:", default_eye())})
+  output$eyeselect <- question_format("eye", "Eye Color:")
 
   default_hair <- shiny::reactive(head_selection()[head_selection()$Item=="hair",]$Color)
 
