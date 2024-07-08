@@ -113,34 +113,31 @@ server <- function(input, output) {
   shiny::outputOptions(output, "vis_eye", suspendWhenHidden = FALSE)
 
   # Default Colors
-  question_format <- function(item, label){
+  question_head <- function(item, label){
     default_item <- shiny::reactive(head_selection()[head_selection()$Item==item,]$Color)
     shiny::renderUI({
       colourpicker::colourInput(item, label, default_item())})
   }
 
-  output$eyeselect <- question_format("eye", "Eye Color:")
+  question_clothes <- function(item, label){
+    default_item <- shiny::reactive(clothes_selection()[clothes_selection()$Item==item,]$Color)
+    shiny::renderUI({
+      colourpicker::colourInput(item, label, default_item())})
+  }
 
-  output$hairselect <- question_format("hair1", "Hair Color:")
+  output$eyeselect <- question_head("eye", "Eye Color:")
 
-  output$hair2select <- question_format("hair2", "Secondary Hair Color:")
+  output$hairselect <- question_head("hair1", "Hair Color:")
 
-  output$hair3select <- question_format("hair_lines", "Hair Line Color:")
+  output$hair2select <- question_head("hair2", "Secondary Hair Color:")
 
-  default_glasses <- shiny::reactive(head_selection()[head_selection()$Item=="glasses",]$Color)
+  output$hair3select <- question_head("hair_lines", "Hair Line Color:")
 
-  output$glassesselect <- shiny::renderUI({
-    colourpicker::colourInput("glasses", "Glasses Color:", default_glasses())})
+  output$glassesselect <- question_head("glasses", "Glasses Color:")
 
-  default_skin <- shiny::reactive(head_selection()[head_selection()$Item=="skin",]$Color)
+  output$skinselect <- question_head("skin", "Skin Color:")
 
-  output$skinselect <- shiny::renderUI({
-    colourpicker::colourInput("skin", "Skin Color:", default_skin())})
-
-  default_shirt <- shiny::reactive(clothes_selection()[clothes_selection()$Item=="shirt",]$Color)
-
-  output$shirtselect <- shiny::renderUI({
-    colourpicker::colourInput("shirt", "Shirt Color:", default_shirt())})
+  output$shirtselect <- question_clothes("shirt", "Shirt Color:")
 
   default_pants <- shiny::reactive(clothes_selection()[clothes_selection()$Item=="pants",]$Color)
 
