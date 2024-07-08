@@ -23,3 +23,11 @@ test_that("order is based on count", {
 
   expect_identical(test_result$Text, c("A", "B", "C", "D", "E"))
 })
+
+test_that("error for unknown bubbles", {
+  testing <- data.frame(Count = c(1, 2), Page = c(1,1), Speaker = c("narrator", "defense"),
+                        Bubble = c("Missing", "Right"), Text = c("testing bubbles", "another bubble"))
+
+  expect_error(Format_Testimony(testing),
+  "All 'Bubble' Columns must be labelled as 'Right', 'Left', 'Center', or 'None'")
+})

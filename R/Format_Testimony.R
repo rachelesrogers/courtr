@@ -18,6 +18,10 @@ Format_Testimony <- function(testimony_csv){
 
   combined_testimony <- testimony_csv
 
+  if (!all(unique(combined_testimony$Bubble) %in% c("Right", "Left", "Center", "None"))){
+    stop("All 'Bubble' Columns must be labelled as 'Right', 'Left', 'Center', or 'None'")
+  }
+
 combined_testimony$before <- NA
 combined_testimony$after <- NA
 
