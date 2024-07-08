@@ -125,10 +125,7 @@ server <- function(input, output) {
 
   output$hair2select <- question_format("hair2", "Secondary Hair Color:")
 
-  default_hair3 <- shiny::reactive(head_selection()[head_selection()$Item=="hair_lines",]$Color)
-
-  output$hair3select <- shiny::renderUI({
-    colourpicker::colourInput("hair_lines", "Hair Line Color:", default_hair3())})
+  output$hair3select <- question_format("hair_lines", "Hair Line Color:")
 
   default_glasses <- shiny::reactive(head_selection()[head_selection()$Item=="glasses",]$Color)
 
