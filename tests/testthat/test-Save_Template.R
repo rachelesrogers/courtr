@@ -1,5 +1,5 @@
 test_that("template saves appropriately", {
-  temp_location <- tempdir()
+  temp_location <- tempdir(check=TRUE)
 
   Save_Template(temp_location, overwrite = TRUE)
 
