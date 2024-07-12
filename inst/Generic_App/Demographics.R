@@ -1,5 +1,7 @@
 demo <- list(list(
   h1("Demographic Information"),
+  h5("Questions based on Garrett BL, Scurich N, Crozier WE (2020). Mock jurors' evaluation of firearm examiner testimony.
+Law and Human Behavior, 44(5): 412-423."),
   br(),
   textInput("uniqueID", "Unique ID"),
   br(),
