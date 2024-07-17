@@ -11,6 +11,6 @@
 #' Save_Template("your/file/path")
 #' }
 Save_Template <- function(file_path, overwrite=FALSE){
-  fs::dir_copy(path="inst/Generic_App",
-           new_path=file_path, overwrite = overwrite)
+  fs::dir_copy(path=system.file("Generic_App", package="courtr"),
+           new_path=paste0(file_path,"/Generic_App"), overwrite = overwrite)
 }
