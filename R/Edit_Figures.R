@@ -46,6 +46,10 @@ ui <- shiny::fluidPage(
                               shiny::uiOutput('suitselect')),
       shiny::conditionalPanel(condition= "output.vis_tie",
                        shiny::uiOutput('tieselect')),
+      shiny::conditionalPanel(condition= "output.vis_skirt",
+                              shiny::uiOutput('skirtselect')),
+      shiny::conditionalPanel(condition= "output.vis_buttons",
+                              shiny::uiOutput('buttonselect')),
       shiny::conditionalPanel(condition= "output.vis_shoes",
                               shiny::uiOutput('shoesselect')),
       shiny::downloadButton("download_svg", "Download Character as SVG"),
@@ -97,6 +101,12 @@ server <- function(input, output) {
   output$vis_tie <- shiny::reactive({'tie' %in% clothes_selection()$Item})
   shiny::outputOptions(output, "vis_tie", suspendWhenHidden = FALSE)
 
+  output$vis_skirt <- shiny::reactive({'skirt' %in% clothes_selection()$Item})
+  shiny::outputOptions(output, "vis_skirt", suspendWhenHidden = FALSE)
+
+  output$vis_buttons <- shiny::reactive({'buttons' %in% clothes_selection()$Item})
+  shiny::outputOptions(output, "vis_buttons", suspendWhenHidden = FALSE)
+
   output$vis_shoes <- shiny::reactive({'shoes' %in% clothes_selection()$Item})
   shiny::outputOptions(output, "vis_shoes", suspendWhenHidden = FALSE)
 
@@ -144,6 +154,10 @@ server <- function(input, output) {
   output$suitselect <- question_clothes("suit", "Suit Color:")
 
   output$tieselect <- question_clothes("tie", "Tie Color:")
+
+  output$skirtselect <- question_clothes("skirt", "Skirt Color:")
+
+  output$buttonselect <- question_clothes("buttons", "Button Color:")
 
   output$shoesselect <- question_clothes("shoes", "Shoe Color:")
 
@@ -199,6 +213,10 @@ server <- function(input, output) {
     combined_split <- apply_fill(combined_split, "suit")
 
     combined_split <- apply_fill(combined_split, "tie")
+
+    combined_split <- apply_fill(combined_split, "skirt")
+
+    combined_split <- apply_fill(combined_split, "buttons")
 
     combined_split <- apply_fill(combined_split, "shoes")
 
