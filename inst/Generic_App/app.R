@@ -146,7 +146,7 @@ server <- function(input, output, session) {
   # Page counter used for progress bar
   counter <- reactiveVal(0)
   observeEvent(input$informed | input$demopage | input$testimonypage | input$questionpage, {
-    shinyjs::runjs("window.scrollTo(0, 0)") # Scroll to top of each new page
+    shinyjs::runjs("window.scrollTo(0, 0)") # Scroll to top of each new page - https://stackoverflow.com/questions/49137032/r-shiny-dashboard-scroll-to-top-on-button-click
     newcount <- counter() + 1
     counter(newcount)
   })
