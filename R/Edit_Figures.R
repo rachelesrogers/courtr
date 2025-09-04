@@ -65,11 +65,13 @@ ui <- shiny::fluidPage(
 server <- function(input, output) {
 
   head_path <- shiny::reactive({
-    paste0("inst/www/head",input$head_choice,".svg")
+    system.file("figures", paste0("head",input$head_choice,".svg"), package="courtr", mustWork=TRUE)
+    #paste0("inst/www/head",input$head_choice,".svg")
   })
 
   body_path <- shiny::reactive({
-    paste0("inst/www/",input$clothes_choice,".svg")
+    system.file("figures", paste0(input$clothes_choice,".svg"), package="courtr", mustWork=TRUE)
+    #paste0("inst/www/",input$clothes_choice,".svg")
   })
 
   clothes_selection <- shiny::reactive({
