@@ -1,0 +1,22 @@
+---
+title: "Character Creation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Character Creation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(courtr)
+```
+
+Characters can be viewed and edited through the [Edit_Figures()] function.
+This function will open an  RShiny app
