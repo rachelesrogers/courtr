@@ -41,7 +41,7 @@ Available character heads are shown here:
 
 ```{r,  echo=FALSE, message=FALSE, warning=FALSE}
 
-knitr::include_graphics(system.file("figures/head1.svg", package="courtr", mustWork=TRUE))
+knitr::include_graphics("img/head1.svg")
 knitr::include_graphics(system.file("figures", "head2.svg", package="courtr", mustWork=TRUE))
 knitr::include_graphics(system.file("figures", "head3.svg", package="courtr", mustWork=TRUE))
 knitr::include_graphics(system.file("figures", "head4.svg", package="courtr", mustWork=TRUE))
