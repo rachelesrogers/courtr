@@ -3,7 +3,7 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   character-creation: character-creation.html
-last_built: 2025-10-28T03:34Z
+last_built: 2025-10-28T03:41Z
 urls:
   reference: https://rachelesrogers.github.io/courtr/reference
   article: https://rachelesrogers.github.io/courtr/articles
