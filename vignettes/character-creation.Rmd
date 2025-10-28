@@ -27,14 +27,14 @@ The available character outfits are shown below.
 
 ```{r study-outfits, echo=FALSE, message=FALSE, warning=FALSE, out.width = "24%", fig.cap = "Available outfits: analyst, defendant, hazmat, inmate, judge, lawyer, police, and scientist", fig.show="hold"}
 
-knitr::include_graphics(system.file("figures", "analyst.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "defendant.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "hazmat.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "inmate.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "judge.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "lawyer.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "police.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "scientist.svg", package="courtr", mustWork=TRUE))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "analyst.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "defendant.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "hazmat.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "inmate.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "judge.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "lawyer.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "police.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "scientist.svg", package="courtr", mustWork=TRUE)))
 
 ```
 
@@ -43,26 +43,22 @@ Available character heads are shown here:
 
 ```{r,  echo=FALSE, message=FALSE, warning=FALSE}
 
-knitr::include_graphics("img/head1.svg")
-
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head1.svg", package="courtr", mustWork=TRUE)))
 magick::image_ggplot(magick::image_read_svg(system.file("figures", "head2.svg", package="courtr", mustWork=TRUE)))
-
-knitr::include_graphics(system.file("figures", "head2.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "head3.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "head4.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "head5.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "head6.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "head7.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "head8.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "head9.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "head10.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "head11.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "head12.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "head13.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "head14.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "head16.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "head17.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "head18.svg", package="courtr", mustWork=TRUE))
-knitr::include_graphics(system.file("figures", "head19.svg", package="courtr", mustWork=TRUE))
-
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head3.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head4.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head5.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head6.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head7.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head8.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head9.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head10.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head11.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head12.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head13.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head14.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head16.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head17.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head18.svg", package="courtr", mustWork=TRUE)))
+magick::image_ggplot(magick::image_read_svg(system.file("figures", "head19.svg", package="courtr", mustWork=TRUE)))
 ```
