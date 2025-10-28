@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(courtr)
+library(magick)
+library(rsvg)
 ```
 
 Characters can be viewed and edited through the [Edit_Figures()] function.
