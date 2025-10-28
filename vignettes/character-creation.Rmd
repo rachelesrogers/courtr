@@ -41,7 +41,7 @@ magick::image_ggplot(magick::image_read_svg(system.file("figures", "scientist.sv
 
 Available character heads are shown here:
 
-```{r,  echo=FALSE, message=FALSE, warning=FALSE}
+```{r,  echo=FALSE, message=FALSE, warning=FALSE, out.width = "24%", fig.cap = "Available heads", fig.show="hold"}
 
 magick::image_ggplot(magick::image_read_svg(system.file("figures", "head1.svg", package="courtr", mustWork=TRUE)))
 magick::image_ggplot(magick::image_read_svg(system.file("figures", "head2.svg", package="courtr", mustWork=TRUE)))
