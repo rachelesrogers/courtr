@@ -96,7 +96,13 @@ server <- function(input, output, session) {
 
   # Sampling between experimental conditions - as indicated in the Combined_Testimony.csv
   condition1 <- sample(c("A", "B", "C"),1, prob=c(1/3, 1/3, 1/3))
-  condition2 <- sample(c("shorter", "longer"),1, prob=c(0.5, 0.5))
+  if(getOption("shiny.testmode", FALSE)){
+    condition2 <- "longer"
+  } else {
+    condition2 <- sample(c("shorter", "longer"),1, prob=c(0.5, 0.5))
+
+  }
+
   condition3 <- sample(c("Yes", "No"),1, prob=c(0.5, 0.5))
 
   # List of questions for two of the experimental conditions - randomized by 'sample()' in the middle
