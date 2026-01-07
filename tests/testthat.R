@@ -8,5 +8,6 @@
 
 library(testthat)
 library(courtr)
+library(shinytest2)
 
 test_check("courtr")
