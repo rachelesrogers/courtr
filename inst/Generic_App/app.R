@@ -96,7 +96,7 @@ server <- function(input, output, session) {
 
   # Sampling between experimental conditions - as indicated in the Combined_Testimony.csv
   condition1 <- sample(c("A", "B", "C"),1, prob=c(1/3, 1/3, 1/3))
-  if(getOption("shiny.testmode", TRUE)){
+  if(getOption("shiny.testmode", TRUE)){ # added for app testing - this can be removed
     condition2 <- "longer"
   } else {
     condition2 <- sample(c("shorter", "longer"),1, prob=c(0.5, 0.5))
@@ -292,6 +292,7 @@ server <- function(input, output, session) {
   # })
 
   # Adding a two second delay on the testimony page button
+
   observeEvent(input$testimonypage,{
     shinyjs::disable("testimonypage")
     # Initialize the timer, 10 seconds, not active.

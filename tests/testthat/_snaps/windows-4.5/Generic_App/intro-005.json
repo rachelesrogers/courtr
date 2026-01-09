@@ -1,0 +1,56 @@
+{
+  "input": {
+    "age": "46 - 55",
+    "arrest": "Yes",
+    "demopage": 2,
+    "educ": "Some college",
+    "fixed_question1": null,
+    "gender": "Other/non-binary",
+    "guncomfort": "Neither Comfortable nor Uncomfortable",
+    "gunown": "Yes",
+    "income": "$30,000 - $39,999",
+    "informed": 1,
+    "jury": "Yes",
+    "jurycrim": "No",
+    "notepad": "",
+    "poli": "Very Liberal",
+    "questionpage": 0,
+    "race": "American Indian or Alaska Native",
+    "state": "AR",
+    "testimonypage": 0,
+    "uniqueID": "test",
+    "vote": "Republican"
+  },
+  "output": {
+    "demo_length": 2,
+    "demoquest": {
+      "html": "",
+      "deps": [
+
+      ]
+    },
+    "finalquest": {
+      "html": "<div id=\"fixed_question1\" class=\"form-group shiny-input-radiogroup shiny-input-container\" role=\"radiogroup\" aria-labelledby=\"fixed_question1-label\">\n  <label class=\"control-label\" id=\"fixed_question1-label\" for=\"fixed_question1\">This question is fixed to always appear first after the testimony.\n      Questions can be found in the Questions.R file.<\/label>\n  <div class=\"shiny-options-group\">\n    <div class=\"radio\">\n      <label>\n        <input type=\"radio\" name=\"fixed_question1\" value=\"Awesome!\"/>\n        <span>Awesome!<\/span>\n      <\/label>\n    <\/div>\n    <div class=\"radio\">\n      <label>\n        <input type=\"radio\" name=\"fixed_question1\" value=\"Great.\"/>\n        <span>Great.<\/span>\n      <\/label>\n    <\/div>\n    <div class=\"radio\">\n      <label>\n        <input type=\"radio\" name=\"fixed_question1\" value=\"Not Great.\"/>\n        <span>Not Great.<\/span>\n      <\/label>\n    <\/div>\n  <\/div>\n<\/div>",
+      "deps": [
+
+      ]
+    },
+    "informed_consent": {
+      "html": "<b> Informed Consent Document <\/b>\n<br/><br/>\n<b> Documentation of informed consent<\/b><\/br>\nBy clicking &ldquo; I agree &rdquo; and continuing with the study, this means that<br/>(1) you have read and understood this consent form, and <br/>(2)\nyou have decided to be in the research study.\n\n",
+      "deps": [
+
+      ]
+    },
+    "num_quest": 9,
+    "testimony": {
+      "html": "<div style='display:grid'> The use of the narrator Speaker in the testimony document allows for instructions to participant. HTML tags can be used for testimony formatting. <\/br><\/br> A back button is not included, but there is a notepad for participants to take notes. <\/div>",
+      "deps": [
+
+      ]
+    },
+    "testpages": 5
+  },
+  "export": {
+
+  }
+}
